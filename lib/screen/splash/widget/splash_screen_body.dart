@@ -54,7 +54,7 @@ class SplashScreenBody extends StatelessWidget {
 
   Positioned _navigationButton(ColorScheme colorScheme, TextTheme textTheme, BuildContext context) {
     return Positioned(
-      bottom: 50,
+      bottom: MediaQuery.of(context).size.height / 5 - 80,
       right: 105,
       child: InkWell(
         child: Container(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../models/models.dart';
+import '../../provider/surah/surah_repository.dart';
 import 'widget/widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static const String routeName = '/home';
@@ -14,44 +16,72 @@ class HomeScreen extends StatelessWidget {
   }
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = false;
+  SurahModels listSurah = SurahModels();
+  SurahRepository listSurahProvider = SurahRepository();
+  Future<SurahModels> getListSurah() async {
+    listSurah = await listSurahProvider.getSurah();
+    setState(() {
+      listSurah.code != 200 ? isLoading = false : isLoading = true;
+    });
+    return listSurah;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getListSurah();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: _appBarCustom(textTheme, colorScheme),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            HeaderHome(
-              textTheme: textTheme,
-              colorScheme: colorScheme,
-            ),
-            const SizedBox(height: 15),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        const SizedBox(height: 10),
-                        SurahTile(
-                          surahIndex: index + 1,
-                          textTheme: textTheme,
-                          colorScheme: colorScheme,
-                        ),
-                        const SizedBox(height: 8),
-                        Divider(
-                          thickness: 1,
-                          color: colorScheme.onBackground.withOpacity(0.1),
-                        ),
-                      ],
-                    );
-                  }),
-            ),
-          ],
-        ),
-      ),
+      body: isLoading
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                children: [
+                  HeaderHome(
+                    textTheme: textTheme,
+                    colorScheme: colorScheme,
+                  ),
+                  const SizedBox(height: 15),
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount: listSurah.data!.length,
+                        itemBuilder: (context, index) {
+                          final surah = listSurah.data![index];
+                          return Column(
+                            children: [
+                              const SizedBox(height: 10),
+                              SurahTile(
+                                surahIndex: surah.number!,
+                                textTheme: textTheme,
+                                colorScheme: colorScheme,
+                                surahEnglishName: surah.englishName!,
+                                ayahSurah: surah.numberOfAyahs!,
+                                surahArabName: surah.name!,
+                              ),
+                              const SizedBox(height: 8),
+                              Divider(
+                                thickness: 1,
+                                color: colorScheme.onBackground.withOpacity(0.1),
+                              ),
+                            ],
+                          );
+                        }),
+                  ),
+                ],
+              ),
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 

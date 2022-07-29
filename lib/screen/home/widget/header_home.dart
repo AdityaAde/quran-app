@@ -12,7 +12,7 @@ class HeaderHome extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Assalamualaikum',
+          'Assalamualaikum, \nAditya Ade',
           style: textTheme.subtitle1!.copyWith(
             fontWeight: FontWeight.w500,
             color: colorScheme.onBackground.withOpacity(0.5),
