@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 
-import '../../models/models.dart';
+import '../../models/surah_models.dart';
 import '../../provider/surah/surah_repository.dart';
 import 'widget/widget.dart';
 
@@ -68,6 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 surahEnglishName: surah.englishName!,
                                 ayahSurah: surah.numberOfAyahs!,
                                 surahArabName: surah.name!,
+                                onTap: () {
+                                  final Tuple2<BuildContext, Datum> arguments = Tuple2(context, surah);
+                                  Navigator.pushNamed(context, '/detail-surah', arguments: arguments);
+                                },
                               ),
                               const SizedBox(height: 8),
                               Divider(

@@ -9,6 +9,7 @@ class SurahTile extends StatelessWidget {
     required this.surahEnglishName,
     required this.ayahSurah,
     required this.surahArabName,
+    this.onTap,
   }) : super(key: key);
 
   final TextTheme textTheme;
@@ -17,60 +18,64 @@ class SurahTile extends StatelessWidget {
   final String surahEnglishName;
   final int ayahSurah;
   final String surahArabName;
+  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(children: [
-              Image.asset('assets/images/border.png'),
-              Positioned(
-                bottom: 8,
-                left: surahIndex >= 10 ? 14 : 16,
-                child: Text(surahIndex.toString(), style: textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700)),
-              ),
-            ]),
-            const SizedBox(width: 15),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  surahEnglishName,
-                  style: textTheme.bodyText1!.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(children: [
+                Image.asset('assets/images/border.png'),
+                Positioned(
+                  bottom: 8,
+                  left: surahIndex >= 10 ? 14 : 16,
+                  child: Text(surahIndex.toString(), style: textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700)),
                 ),
-                Text(
-                  '$ayahSurah Verses',
-                  style: textTheme.bodyText1!.copyWith(
-                    color: colorScheme.onBackground.withOpacity(0.5),
-                    fontWeight: FontWeight.w500,
+              ]),
+              const SizedBox(width: 15),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    surahEnglishName,
+                    style: textTheme.bodyText1!.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              surahArabName,
-              style: textTheme.bodyText1!.copyWith(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-                color: colorScheme.primary,
+                  Text(
+                    '$ayahSurah Verses',
+                    style: textTheme.bodyText1!.copyWith(
+                      color: colorScheme.onBackground.withOpacity(0.5),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
-              textAlign: TextAlign.end,
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                surahArabName,
+                style: textTheme.bodyText1!.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                  color: colorScheme.primary,
+                ),
+                textAlign: TextAlign.end,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

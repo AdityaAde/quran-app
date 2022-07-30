@@ -7,7 +7,12 @@
 
 import 'package:quran_app/provider/surah/surah_repository.dart';
 
+import 'package:quran_app/provider/detail_surah/detail_surah_repository.dart';
+
 void main() async {
   SurahRepository surahRepository = SurahRepository();
   await surahRepository.getSurah();
+
+  DetailSurahRepository detailSurahRepository = DetailSurahRepository();
+  await detailSurahRepository.getDetailSurah('114');
 }
