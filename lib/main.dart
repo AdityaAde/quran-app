@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'bloc/list_surah/list_surah_bloc.dart';
 import 'config/config.dart';
 
 void main() {
@@ -10,11 +12,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Quran App',
-      theme: theme(),
-      onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: '/',
+    return BlocProvider<ListSurahBloc>(
+      create: (context) => ListSurahBloc(),
+      child: MaterialApp(
+        title: 'Quran App',
+        theme: theme(),
+        onGenerateRoute: AppRouter.onGenerateRoute,
+        initialRoute: '/',
+      ),
     );
   }
 }

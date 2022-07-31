@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../bloc/bloc.dart';
 
 class SplashScreenBody extends StatelessWidget {
   const SplashScreenBody({Key? key}) : super(key: key);
@@ -52,27 +55,33 @@ class SplashScreenBody extends StatelessWidget {
     );
   }
 
-  Positioned _navigationButton(ColorScheme colorScheme, TextTheme textTheme, BuildContext context) {
-    return Positioned(
-      bottom: MediaQuery.of(context).size.height / 5 - 80,
-      right: 105,
-      child: InkWell(
-        child: Container(
-          decoration: BoxDecoration(
-            color: colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(30),
-          ),
-          height: 60,
-          width: 185,
-          child: Center(
-            child: Text(
-              'Get Started',
-              style: textTheme.headline4!.copyWith(color: colorScheme.background),
-            ),
-          ),
-        ),
-        onTap: () => Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false),
-      ),
+  Widget _navigationButton(ColorScheme colorScheme, TextTheme textTheme, BuildContext context) {
+    return BlocBuilder<ListSurahBloc, ListSurahState>(
+      builder: (context, state) {
+        return Positioned(
+          bottom: MediaQuery.of(context).size.height / 5 - 80,
+          right: 105,
+          child: InkWell(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                height: 60,
+                width: 185,
+                child: Center(
+                  child: Text(
+                    'Get Started',
+                    style: textTheme.headline4!.copyWith(color: colorScheme.background),
+                  ),
+                ),
+              ),
+              onTap: () {
+                context.read<ListSurahBloc>().add(GetSurahEvent());
+                Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+              }),
+        );
+      },
     );
   }
 }

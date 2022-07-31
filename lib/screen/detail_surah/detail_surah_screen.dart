@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/models/detail_surah_english_models.dart';
-import 'package:quran_app/models/detail_surah_models.dart';
-import 'package:quran_app/provider/detail_surah/detail_surah.dart';
 import 'package:tuple/tuple.dart';
 
-import 'widget/detail_surah_body.dart';
-import 'widget/header_title_surah.dart';
+import 'widget/widget.dart';
+import '../../components/components.dart';
+import '../../provider/detail_surah/detail_surah.dart';
+import '../../models/detail_surah_english_models.dart';
+import '../../models/detail_surah_models.dart';
 import '../../models/surah_models.dart';
 
 class DetailSurahScreen extends StatefulWidget {
@@ -69,7 +69,7 @@ class _DetailSurahScreenState extends State<DetailSurahScreen> {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: _appBarCustom(context, textTheme, colorScheme, widget.arguments!.item2.englishName!),
+      appBar: AppBarCustom.appBarCustom(widget.arguments!.item2.englishName!, textTheme, colorScheme, context),
       body: isLoading
           ? Column(
               children: [
@@ -88,43 +88,6 @@ class _DetailSurahScreenState extends State<DetailSurahScreen> {
               ],
             )
           : const Center(child: CircularProgressIndicator()),
-    );
-  }
-
-  PreferredSizeWidget _appBarCustom(
-    BuildContext context,
-    TextTheme textTheme,
-    ColorScheme colorScheme,
-    String title,
-  ) {
-    return AppBar(
-      title: Text(
-        title,
-        style: textTheme.headline4!.copyWith(color: colorScheme.primary),
-      ),
-      leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-            size: 20,
-          )),
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      actions: [
-        IconButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Not implemented yet.')),
-              );
-            },
-            icon: Icon(
-              Icons.search,
-              color: colorScheme.onBackground.withOpacity(0.5),
-            ))
-      ],
     );
   }
 }

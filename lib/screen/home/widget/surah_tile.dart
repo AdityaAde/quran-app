@@ -34,7 +34,11 @@ class SurahTile extends StatelessWidget {
                 Image.asset('assets/images/border.png'),
                 Positioned(
                   bottom: 8,
-                  left: surahIndex >= 10 ? 14 : 16,
+                  left: (surahIndex < 10
+                      ? 16
+                      : surahIndex <= 99
+                          ? 13
+                          : 11),
                   child: Text(surahIndex.toString(), style: textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700)),
                 ),
               ]),
