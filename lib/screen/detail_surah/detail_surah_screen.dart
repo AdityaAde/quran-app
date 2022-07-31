@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/models/detail_surah_english_models.dart';
+import 'package:quran_app/models/detail_surah_models.dart';
+import 'package:quran_app/provider/detail_surah/detail_surah.dart';
 import 'package:tuple/tuple.dart';
 
+import 'widget/detail_surah_body.dart';
+import 'widget/header_title_surah.dart';
 import '../../models/surah_models.dart';
 
-class DetailSurahScreen extends StatelessWidget {
+class DetailSurahScreen extends StatefulWidget {
   const DetailSurahScreen({Key? key, this.arguments}) : super(key: key);
 
   final Tuple2<BuildContext, Datum>? arguments;
@@ -17,59 +22,72 @@ class DetailSurahScreen extends StatelessWidget {
   }
 
   @override
+  State<DetailSurahScreen> createState() => _DetailSurahScreenState();
+}
+
+class _DetailSurahScreenState extends State<DetailSurahScreen> {
+  SurahDetailsModels surahDetails = SurahDetailsModels();
+  SurahDetailsEnglishModels surahDetailsEnglish = SurahDetailsEnglishModels();
+  final DetailSurahRepository _detailSurahRepository = DetailSurahRepository();
+
+  List<Ayah> ayahs = [];
+  List<AyahOnEnglish> ayahOnEnglish = [];
+
+  bool isLoading = false;
+
+  Future<SurahDetailsModels> _getDetailSurah() async {
+    surahDetails = await _detailSurahRepository.getDetailSurah(widget.arguments!.item2.number.toString());
+    setState(() {
+      surahDetails.code == 200 ? isLoading = true : isLoading = false;
+      for (var element in surahDetails.data!.ayahs!) {
+        ayahs.add(element);
+      }
+    });
+    return surahDetails;
+  }
+
+  Future<SurahDetailsEnglishModels> _getDetailSurahOnEnglish() async {
+    surahDetailsEnglish = await _detailSurahRepository.getDetailSurahEnglish(widget.arguments!.item2.number.toString());
+    (widget.arguments!.item2.number.toString());
+    setState(() {
+      for (var element in surahDetailsEnglish.data!.ayahs!) {
+        ayahOnEnglish.add(element);
+      }
+    });
+    return surahDetailsEnglish;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getDetailSurah();
+    _getDetailSurahOnEnglish();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: _appBarCustom(context, textTheme, colorScheme, arguments!.item2.englishName!),
-      body: Column(
-        children: [
-          const SizedBox(height: 15),
-          Stack(
-            children: [
-              Image.asset(
-                'assets/images/detail-surah.png',
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.1 + 10,
-                right: MediaQuery.of(context).size.width / 2 - 123,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 23),
-                  child: Column(
-                    children: [
-                      Text(
-                        arguments!.item2.englishName!,
-                        style: textTheme.headline3!.copyWith(color: colorScheme.background),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        arguments!.item2.englishNameTranslation!,
-                        style: textTheme.headline3!.copyWith(
-                          color: colorScheme.background,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      SizedBox(
-                        width: 250,
-                        child: Divider(
-                          thickness: 1,
-                          color: colorScheme.background.withOpacity(0.7),
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      Text('${arguments!.item2.numberOfAyahs!.toString()} VERSES',
-                          style: textTheme.headline4!.copyWith(color: colorScheme.background))
-                    ],
-                  ),
+      appBar: _appBarCustom(context, textTheme, colorScheme, widget.arguments!.item2.englishName!),
+      body: isLoading
+          ? Column(
+              children: [
+                const SizedBox(height: 15),
+                HeaderTitleSurah(
+                  arguments: widget.arguments,
+                  textTheme: textTheme,
+                  colorScheme: colorScheme,
                 ),
-              ),
-            ],
-          ),
-        ],
-      ),
+                DetailSurahBody(
+                  colorScheme: colorScheme,
+                  textTheme: textTheme,
+                  surah: ayahs,
+                  surahOnEnglish: ayahOnEnglish,
+                ),
+              ],
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 
@@ -97,7 +115,11 @@ class DetailSurahScreen extends StatelessWidget {
       elevation: 0,
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Not implemented yet.')),
+              );
+            },
             icon: Icon(
               Icons.search,
               color: colorScheme.onBackground.withOpacity(0.5),

@@ -100,7 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
       elevation: 0,
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Not implemented yet.')),
+              );
+            },
             icon: Icon(
               Icons.search,
               color: colorScheme.onBackground.withOpacity(0.5),

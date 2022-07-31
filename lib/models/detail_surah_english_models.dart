@@ -1,15 +1,16 @@
 // To parse this JSON data, do
 //
-//     final surahDetailsModels = surahDetailsModelsFromJson(jsonString);
+//     final surahDetailsEnglishModels = surahDetailsEnglishModelsFromJson(jsonString);
 
 import 'dart:convert';
 
-SurahDetailsModels surahDetailsModelsFromJson(String str) => SurahDetailsModels.fromJson(json.decode(str));
+SurahDetailsEnglishModels surahDetailsEnglishModelsFromJson(String str) =>
+    SurahDetailsEnglishModels.fromJson(json.decode(str));
 
-String surahDetailsModelsToJson(SurahDetailsModels data) => json.encode(data.toJson());
+String surahDetailsEnglishModelsToJson(SurahDetailsEnglishModels data) => json.encode(data.toJson());
 
-class SurahDetailsModels {
-  SurahDetailsModels({
+class SurahDetailsEnglishModels {
+  SurahDetailsEnglishModels({
     this.code,
     this.status,
     this.data,
@@ -19,7 +20,7 @@ class SurahDetailsModels {
   String? status;
   Data? data;
 
-  factory SurahDetailsModels.fromJson(Map<String, dynamic> json) => SurahDetailsModels(
+  factory SurahDetailsEnglishModels.fromJson(Map<String, dynamic> json) => SurahDetailsEnglishModels(
         code: json["code"],
         status: json["status"],
         data: Data.fromJson(json["data"]),
@@ -50,7 +51,7 @@ class Data {
   String? englishNameTranslation;
   String? revelationType;
   int? numberOfAyahs;
-  List<Ayah>? ayahs;
+  List<AyahOnEnglish>? ayahs;
   Edition? edition;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -60,7 +61,7 @@ class Data {
         englishNameTranslation: json["englishNameTranslation"],
         revelationType: json["revelationType"],
         numberOfAyahs: json["numberOfAyahs"],
-        ayahs: List<Ayah>.from(json["ayahs"].map((x) => Ayah.fromJson(x))),
+        ayahs: List<AyahOnEnglish>.from(json["ayahs"].map((x) => AyahOnEnglish.fromJson(x))),
         edition: Edition.fromJson(json["edition"]),
       );
 
@@ -76,11 +77,9 @@ class Data {
       };
 }
 
-class Ayah {
-  Ayah({
+class AyahOnEnglish {
+  AyahOnEnglish({
     this.number,
-    this.audio,
-    this.audioSecondary,
     this.text,
     this.numberInSurah,
     this.juz,
@@ -92,8 +91,6 @@ class Ayah {
   });
 
   int? number;
-  String? audio;
-  List<String>? audioSecondary;
   String? text;
   int? numberInSurah;
   int? juz;
@@ -103,10 +100,8 @@ class Ayah {
   int? hizbQuarter;
   bool? sajda;
 
-  factory Ayah.fromJson(Map<String, dynamic> json) => Ayah(
+  factory AyahOnEnglish.fromJson(Map<String, dynamic> json) => AyahOnEnglish(
         number: json["number"],
-        audio: json["audio"],
-        audioSecondary: List<String>.from(json["audioSecondary"].map((x) => x)),
         text: json["text"],
         numberInSurah: json["numberInSurah"],
         juz: json["juz"],
@@ -119,8 +114,6 @@ class Ayah {
 
   Map<String, dynamic> toJson() => {
         "number": number,
-        "audio": audio,
-        "audioSecondary": List<dynamic>.from(audioSecondary!.map((x) => x)),
         "text": text,
         "numberInSurah": numberInSurah,
         "juz": juz,
@@ -149,7 +142,7 @@ class Edition {
   String? englishName;
   String? format;
   String? type;
-  dynamic direction;
+  String? direction;
 
   factory Edition.fromJson(Map<String, dynamic> json) => Edition(
         identifier: json["identifier"],
