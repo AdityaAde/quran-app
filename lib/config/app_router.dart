@@ -13,6 +13,7 @@ class AppRouter {
         return HomeScreen.route();
       case '/detail-surah':
         return DetailSurahScreen.route(arguments: settings.arguments as Tuple2<BuildContext, Datum>);
+
       default:
         return _errorRoute();
     }
@@ -21,10 +22,8 @@ class AppRouter {
   static Route _errorRoute() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: '/error'),
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Something went worng'),
-        ),
+      builder: (_) => const Scaffold(
+        body: Center(child: Text('Something went wrong')),
       ),
     );
   }

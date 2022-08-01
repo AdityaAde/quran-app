@@ -25,7 +25,13 @@ class DetailSurahScreen extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-        appBar: AppBarCustom.appBarCustom(arguments!.item2.englishName!, textTheme, colorScheme, context),
+        appBar: AppBarCustom.appBarCustom(
+          context,
+          arguments!.item2.englishName!,
+          textTheme,
+          colorScheme,
+          () {},
+        ),
         body: BlocConsumer<DetailSurahBloc, DetailSurahState>(
           listener: (context, state) {
             if (state is DetailSurahError) {

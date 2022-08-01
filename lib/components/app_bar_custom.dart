@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 class AppBarCustom {
   static PreferredSizeWidget appBarCustom(
-      String title, TextTheme textTheme, ColorScheme colorScheme, BuildContext context) {
+    BuildContext context,
+    String title,
+    TextTheme textTheme,
+    ColorScheme colorScheme,
+    VoidCallback? onPressed,
+  ) {
     return AppBar(
       title: Text(
         title,
@@ -12,11 +17,7 @@ class AppBarCustom {
       elevation: 0,
       actions: [
         IconButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Not implemented yet.')),
-              );
-            },
+            onPressed: onPressed,
             icon: Icon(
               Icons.search,
               color: colorScheme.onBackground.withOpacity(0.5),
