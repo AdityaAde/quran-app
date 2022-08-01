@@ -1,4 +1,4 @@
-// To parse this JSON data, do
+// To parse this JSON Surah, do
 //
 //     final surahDetailsModels = surahDetailsModelsFromJson(jsonString);
 
@@ -17,12 +17,12 @@ class SurahDetailsModels {
 
   int? code;
   String? status;
-  Data? data;
+  Surah? data;
 
   factory SurahDetailsModels.fromJson(Map<String, dynamic> json) => SurahDetailsModels(
         code: json["code"],
         status: json["status"],
-        data: Data.fromJson(json["data"]),
+        data: Surah.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,8 +32,8 @@ class SurahDetailsModels {
       };
 }
 
-class Data {
-  Data({
+class Surah {
+  Surah({
     this.number,
     this.name,
     this.englishName,
@@ -41,7 +41,6 @@ class Data {
     this.revelationType,
     this.numberOfAyahs,
     this.ayahs,
-    this.edition,
   });
 
   int? number;
@@ -51,9 +50,8 @@ class Data {
   String? revelationType;
   int? numberOfAyahs;
   List<Ayah>? ayahs;
-  Edition? edition;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Surah.fromJson(Map<String, dynamic> json) => Surah(
         number: json["number"],
         name: json["name"],
         englishName: json["englishName"],
@@ -61,7 +59,6 @@ class Data {
         revelationType: json["revelationType"],
         numberOfAyahs: json["numberOfAyahs"],
         ayahs: List<Ayah>.from(json["ayahs"].map((x) => Ayah.fromJson(x))),
-        edition: Edition.fromJson(json["edition"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -72,7 +69,6 @@ class Data {
         "revelationType": revelationType,
         "numberOfAyahs": numberOfAyahs,
         "ayahs": List<dynamic>.from(ayahs!.map((x) => x.toJson())),
-        "edition": edition!.toJson(),
       };
 }
 
@@ -129,45 +125,5 @@ class Ayah {
         "ruku": ruku,
         "hizbQuarter": hizbQuarter,
         "sajda": sajda,
-      };
-}
-
-class Edition {
-  Edition({
-    this.identifier,
-    this.language,
-    this.name,
-    this.englishName,
-    this.format,
-    this.type,
-    this.direction,
-  });
-
-  String? identifier;
-  String? language;
-  String? name;
-  String? englishName;
-  String? format;
-  String? type;
-  dynamic direction;
-
-  factory Edition.fromJson(Map<String, dynamic> json) => Edition(
-        identifier: json["identifier"],
-        language: json["language"],
-        name: json["name"],
-        englishName: json["englishName"],
-        format: json["format"],
-        type: json["type"],
-        direction: json["direction"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "identifier": identifier,
-        "language": language,
-        "name": name,
-        "englishName": englishName,
-        "format": format,
-        "type": type,
-        "direction": direction,
       };
 }

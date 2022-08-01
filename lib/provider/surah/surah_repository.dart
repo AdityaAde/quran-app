@@ -12,7 +12,6 @@ class SurahRepository extends BaseSurahRepository {
     final response = await http.get(Uri.parse(Config.listSurahUrl));
     try {
       if (response.statusCode == 200) {
-        print("GET ALL SURAH OK");
         final result = jsonDecode(response.body);
         return SurahModels.fromJson(result);
       } else {

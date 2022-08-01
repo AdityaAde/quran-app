@@ -10,8 +10,8 @@ abstract class DetailSurahState extends Equatable {
 class DetailSurahLoading extends DetailSurahState {}
 
 class DetailSurahLoaded extends DetailSurahState {
-  final SurahDetailsModels surahDetailArabic;
-  final SurahDetailsEnglishModels surahDetailEnglish;
+  final List<Ayah> surahDetailArabic;
+  final List<AyahOnEnglish> surahDetailEnglish;
 
   const DetailSurahLoaded({required this.surahDetailArabic, required this.surahDetailEnglish});
 

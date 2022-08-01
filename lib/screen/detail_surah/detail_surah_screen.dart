@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/bloc/bloc.dart';
 import 'package:tuple/tuple.dart';
 
 import 'widget/widget.dart';
 import '../../components/components.dart';
-import '../../provider/detail_surah/detail_surah.dart';
-import '../../models/detail_surah_english_models.dart';
-import '../../models/detail_surah_models.dart';
 import '../../models/surah_models.dart';
 
-class DetailSurahScreen extends StatefulWidget {
+class DetailSurahScreen extends StatelessWidget {
   const DetailSurahScreen({Key? key, this.arguments}) : super(key: key);
 
   final Tuple2<BuildContext, Datum>? arguments;
@@ -22,72 +21,45 @@ class DetailSurahScreen extends StatefulWidget {
   }
 
   @override
-  State<DetailSurahScreen> createState() => _DetailSurahScreenState();
-}
-
-class _DetailSurahScreenState extends State<DetailSurahScreen> {
-  SurahDetailsModels surahDetails = SurahDetailsModels();
-  SurahDetailsEnglishModels surahDetailsEnglish = SurahDetailsEnglishModels();
-  final DetailSurahRepository _detailSurahRepository = DetailSurahRepository();
-
-  List<Ayah> ayahs = [];
-  List<AyahOnEnglish> ayahOnEnglish = [];
-
-  bool isLoading = false;
-
-  Future<SurahDetailsModels> _getDetailSurah() async {
-    surahDetails = await _detailSurahRepository.getDetailSurah(widget.arguments!.item2.number.toString());
-    setState(() {
-      surahDetails.code == 200 ? isLoading = true : isLoading = false;
-      for (var element in surahDetails.data!.ayahs!) {
-        ayahs.add(element);
-      }
-    });
-    return surahDetails;
-  }
-
-  Future<SurahDetailsEnglishModels> _getDetailSurahOnEnglish() async {
-    surahDetailsEnglish = await _detailSurahRepository.getDetailSurahEnglish(widget.arguments!.item2.number.toString());
-    (widget.arguments!.item2.number.toString());
-    setState(() {
-      for (var element in surahDetailsEnglish.data!.ayahs!) {
-        ayahOnEnglish.add(element);
-      }
-    });
-    return surahDetailsEnglish;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getDetailSurah();
-    _getDetailSurahOnEnglish();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBarCustom.appBarCustom(widget.arguments!.item2.englishName!, textTheme, colorScheme, context),
-      body: isLoading
-          ? Column(
-              children: [
-                const SizedBox(height: 15),
-                HeaderTitleSurah(
-                  arguments: widget.arguments,
-                  textTheme: textTheme,
-                  colorScheme: colorScheme,
-                ),
-                DetailSurahBody(
-                  colorScheme: colorScheme,
-                  textTheme: textTheme,
-                  surah: ayahs,
-                  surahOnEnglish: ayahOnEnglish,
-                ),
-              ],
-            )
-          : const Center(child: CircularProgressIndicator()),
-    );
+        appBar: AppBarCustom.appBarCustom(arguments!.item2.englishName!, textTheme, colorScheme, context),
+        body: BlocConsumer<DetailSurahBloc, DetailSurahState>(
+          listener: (context, state) {
+            if (state is DetailSurahError) {
+              context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: arguments!.item2.number.toString()));
+            }
+          },
+          builder: (context, state) {
+            return BlocBuilder<DetailSurahBloc, DetailSurahState>(
+              builder: (context, state) {
+                if (state is DetailSurahLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is DetailSurahLoaded) {
+                  return Column(
+                    children: [
+                      const SizedBox(height: 15),
+                      HeaderTitleSurah(
+                        arguments: arguments,
+                        textTheme: textTheme,
+                        colorScheme: colorScheme,
+                      ),
+                      DetailSurahBody(
+                        colorScheme: colorScheme,
+                        textTheme: textTheme,
+                        surah: state.surahDetailArabic,
+                        surahOnEnglish: state.surahDetailEnglish,
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Center(child: Text('Something Went Wrong'));
+                }
+              },
+            );
+          },
+        ));
   }
 }
