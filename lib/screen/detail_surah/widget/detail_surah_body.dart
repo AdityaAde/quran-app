@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/models/detail_surah_english_models.dart';
-import 'package:quran_app/models/detail_surah_models.dart';
+
+import '../../../models/models.dart';
 
 class DetailSurahBody extends StatelessWidget {
   const DetailSurahBody({

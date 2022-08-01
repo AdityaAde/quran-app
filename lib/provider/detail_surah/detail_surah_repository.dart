@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:quran_app/models/detail_surah_english_models.dart';
-import 'package:quran_app/models/detail_surah_models.dart';
+
 import 'base_detail_surah_repository.dart';
+import '../../models/models.dart';
 
 class DetailSurahRepository extends BaseDetailSurahRepository {
   @override

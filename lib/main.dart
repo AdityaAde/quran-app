@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/bloc/detail_surah/detail_surah_bloc.dart';
-import 'bloc/list_surah/list_surah_bloc.dart';
 import 'config/config.dart';
+
+import 'bloc/bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

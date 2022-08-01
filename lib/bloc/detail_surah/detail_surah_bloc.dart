@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/detail_surah_english_models.dart';
-import '../../models/detail_surah_models.dart';
+import '../../models/models.dart';
 import '../../provider/provider.dart';
 
 part 'detail_surah_event.dart';

@@ -1,15 +1,13 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:quran_app/models/surah_models.dart';
 import 'base_surah_repository.dart';
 
-import '../../config/config.dart';
+import '../../models/surah_models.dart';
 
 class SurahRepository extends BaseSurahRepository {
   @override
   Future<SurahModels> getSurah() async {
-    final response = await http.get(Uri.parse(Config.listSurahUrl));
+    final response = await http.get(Uri.parse('http://api.alquran.cloud/v1/surah'));
     try {
       if (response.statusCode == 200) {
         final result = jsonDecode(response.body);

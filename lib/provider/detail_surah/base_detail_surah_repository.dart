@@ -1,5 +1,4 @@
-import 'package:quran_app/models/detail_surah_english_models.dart';
-import 'package:quran_app/models/detail_surah_models.dart';
+import '../../models/models.dart';
 
 abstract class BaseDetailSurahRepository {
   Future<List<Ayah>> getDetailSurah(String surahIndex);
