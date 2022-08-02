@@ -24,27 +24,31 @@ class DetailSurahScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      appBar: AppBarCustom.appBarCustom(
-        context,
-        arguments!.item2.englishName!,
-        textTheme,
-        colorScheme,
-        () {},
-      ),
-      body: BlocConsumer<DetailSurahBloc, DetailSurahState>(
-        listener: (context, state) {
-          if (state is DetailSurahError) {
-            context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: arguments!.item2.number.toString()));
-          }
-        },
-        builder: (context, state) {
-          return BlocBuilder<DetailSurahBloc, DetailSurahState>(
-            builder: (context, state) {
-              if (state is DetailSurahLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is DetailSurahLoaded) {
-                return Column(
+    return BlocConsumer<DetailSurahBloc, DetailSurahState>(
+      listener: (context, state) {
+        if (state is DetailSurahError) {
+          context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: arguments!.item2.number.toString()));
+        }
+      },
+      builder: (context, state) {
+        return BlocBuilder<DetailSurahBloc, DetailSurahState>(
+          builder: (context, state) {
+            if (state is DetailSurahLoading) {
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else if (state is DetailSurahLoaded) {
+              return Scaffold(
+                appBar: AppBarCustom.appBarCustom(
+                  context,
+                  arguments!.item2.englishName!,
+                  textTheme,
+                  colorScheme,
+                  null,
+                ),
+                body: Column(
                   children: [
                     const SizedBox(height: 15),
                     HeaderTitleSurah(
@@ -59,15 +63,15 @@ class DetailSurahScreen extends StatelessWidget {
                       surahOnEnglish: state.surahDetailEnglish,
                     ),
                   ],
-                );
-              } else {
-                return const Center(child: Text('Something Went Wrong'));
-              }
-            },
-          );
-        },
-      ),
-      bottomNavigationBar: const AudioSurah(),
+                ),
+                bottomNavigationBar: const AudioSurah(),
+              );
+            } else {
+              return const Center(child: Text('Something Went Wrong'));
+            }
+          },
+        );
+      },
     );
   }
 }

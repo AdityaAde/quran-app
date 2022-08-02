@@ -1,9 +1,12 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/bloc/audio_surah/audio_surah_bloc.dart';
 
 import '../../../models/models.dart';
 
 class DetailSurahBody extends StatelessWidget {
-  const DetailSurahBody({
+  DetailSurahBody({
     Key? key,
     required this.colorScheme,
     required this.textTheme,
@@ -15,6 +18,7 @@ class DetailSurahBody extends StatelessWidget {
   final TextTheme textTheme;
   final List<Ayah> surah;
   final List<AyahOnEnglish> surahOnEnglish;
+  final AudioPlayer audioPLayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +59,21 @@ class DetailSurahBody extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              IconButton(
-                                  onPressed: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('Not implemented yet.')),
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.play_arrow_outlined,
-                                    color: colorScheme.primary,
-                                    size: 30,
-                                  )),
+                              BlocBuilder<AudioSurahBloc, AudioSurahState>(
+                                builder: (context, state) {
+                                  return IconButton(
+                                      onPressed: () async {
+                                        context
+                                            .read<AudioSurahBloc>()
+                                            .add(PlayAudioSurahEvent(urlSurahl: surahDetail.audio!));
+                                      },
+                                      icon: Icon(
+                                        Icons.play_arrow_outlined,
+                                        color: colorScheme.primary,
+                                        size: 30,
+                                      ));
+                                },
+                              ),
                               IconButton(
                                 onPressed: () {
                                   ScaffoldMessenger.of(context).showSnackBar(

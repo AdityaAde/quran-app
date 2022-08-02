@@ -16,12 +16,15 @@ class AppBarCustom {
       backgroundColor: Colors.transparent,
       elevation: 0,
       actions: [
-        IconButton(
-            onPressed: onPressed,
-            icon: Icon(
-              Icons.search,
-              color: colorScheme.onBackground.withOpacity(0.5),
-            ))
+        onPressed == null
+            ? const SizedBox()
+            : IconButton(
+                onPressed: onPressed,
+                icon: Icon(
+                  Icons.search,
+                  color: colorScheme.onBackground.withOpacity(0.5),
+                ),
+              ),
       ],
     );
   }
