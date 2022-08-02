@@ -25,47 +25,49 @@ class DetailSurahScreen extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-        appBar: AppBarCustom.appBarCustom(
-          context,
-          arguments!.item2.englishName!,
-          textTheme,
-          colorScheme,
-          () {},
-        ),
-        body: BlocConsumer<DetailSurahBloc, DetailSurahState>(
-          listener: (context, state) {
-            if (state is DetailSurahError) {
-              context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: arguments!.item2.number.toString()));
-            }
-          },
-          builder: (context, state) {
-            return BlocBuilder<DetailSurahBloc, DetailSurahState>(
-              builder: (context, state) {
-                if (state is DetailSurahLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is DetailSurahLoaded) {
-                  return Column(
-                    children: [
-                      const SizedBox(height: 15),
-                      HeaderTitleSurah(
-                        arguments: arguments,
-                        textTheme: textTheme,
-                        colorScheme: colorScheme,
-                      ),
-                      DetailSurahBody(
-                        colorScheme: colorScheme,
-                        textTheme: textTheme,
-                        surah: state.surahDetailArabic,
-                        surahOnEnglish: state.surahDetailEnglish,
-                      ),
-                    ],
-                  );
-                } else {
-                  return const Center(child: Text('Something Went Wrong'));
-                }
-              },
-            );
-          },
-        ));
+      appBar: AppBarCustom.appBarCustom(
+        context,
+        arguments!.item2.englishName!,
+        textTheme,
+        colorScheme,
+        () {},
+      ),
+      body: BlocConsumer<DetailSurahBloc, DetailSurahState>(
+        listener: (context, state) {
+          if (state is DetailSurahError) {
+            context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: arguments!.item2.number.toString()));
+          }
+        },
+        builder: (context, state) {
+          return BlocBuilder<DetailSurahBloc, DetailSurahState>(
+            builder: (context, state) {
+              if (state is DetailSurahLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is DetailSurahLoaded) {
+                return Column(
+                  children: [
+                    const SizedBox(height: 15),
+                    HeaderTitleSurah(
+                      arguments: arguments,
+                      textTheme: textTheme,
+                      colorScheme: colorScheme,
+                    ),
+                    DetailSurahBody(
+                      colorScheme: colorScheme,
+                      textTheme: textTheme,
+                      surah: state.surahDetailArabic,
+                      surahOnEnglish: state.surahDetailEnglish,
+                    ),
+                  ],
+                );
+              } else {
+                return const Center(child: Text('Something Went Wrong'));
+              }
+            },
+          );
+        },
+      ),
+      bottomNavigationBar: const AudioSurah(),
+    );
   }
 }

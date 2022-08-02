@@ -35,9 +35,7 @@ class SearchScreen extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Center(
-      child: Text(query, style: const TextStyle(fontSize: 15)),
-    );
+    return const SizedBox();
   }
 
   @override
