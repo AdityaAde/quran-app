@@ -6,7 +6,7 @@ class AppBarCustom {
     String title,
     TextTheme textTheme,
     ColorScheme colorScheme,
-    VoidCallback? onPressed,
+    Widget widget,
   ) {
     return AppBar(
       title: Text(
@@ -15,17 +15,7 @@ class AppBarCustom {
       ),
       backgroundColor: Colors.transparent,
       elevation: 0,
-      actions: [
-        onPressed == null
-            ? const SizedBox()
-            : IconButton(
-                onPressed: onPressed,
-                icon: Icon(
-                  Icons.search,
-                  color: colorScheme.onBackground.withOpacity(0.5),
-                ),
-              ),
-      ],
+      actions: [widget],
     );
   }
 }

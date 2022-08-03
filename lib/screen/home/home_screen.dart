@@ -49,9 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Quran App',
                 textTheme,
                 colorScheme,
-                () {
-                  showSearch(context: context, delegate: SearchScreen(listSurah: state.listSurah));
-                },
+                IconButton(
+                  onPressed: () {
+                    showSearch(context: context, delegate: SearchScreen(listSurah: state.listSurah));
+                  },
+                  icon: Icon(
+                    Icons.search,
+                    color: colorScheme.onBackground.withOpacity(0.5),
+                  ),
+                ),
               ),
               body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),

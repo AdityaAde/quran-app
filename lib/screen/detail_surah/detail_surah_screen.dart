@@ -24,6 +24,7 @@ class DetailSurahScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final descriptionSurah = arguments!.item2.deskripsi!.replaceAll("</i>", " ");
     return BlocConsumer<DetailSurahBloc, DetailSurahState>(
       listener: (context, state) {
         if (state is DetailSurahError) {
@@ -46,7 +47,44 @@ class DetailSurahScreen extends StatelessWidget {
                   arguments!.item2.namaLatin!,
                   textTheme,
                   colorScheme,
-                  null,
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (builder) {
+                            return Container(
+                              color: Colors.transparent,
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
+                                child: ListTile(
+                                  title: Text(
+                                    'Penjelasan Surah',
+                                    style: textTheme.headline3!.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  subtitle: Padding(
+                                    padding: const EdgeInsets.only(top: 15),
+                                    child: Text(
+                                      descriptionSurah.replaceAll('<i>', ''),
+                                      style: textTheme.bodyLarge,
+                                      textAlign: TextAlign.justify,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                    icon: Icon(
+                      Icons.info_outline,
+                      color: colorScheme.onPrimary,
+                    ),
+                  ),
                 ),
                 body: Column(
                   children: [

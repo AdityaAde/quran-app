@@ -43,12 +43,15 @@ class DetailSurahBody extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CircleAvatar(
-                            backgroundColor: colorScheme.primary,
-                            radius: 13,
-                            child: Text(
-                              indexSurah.toString(),
-                              style: textTheme.bodyLarge!.copyWith(color: colorScheme.background),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: CircleAvatar(
+                              backgroundColor: colorScheme.primary,
+                              radius: 13,
+                              child: Text(
+                                indexSurah.toString(),
+                                style: textTheme.bodyLarge!.copyWith(color: colorScheme.background),
+                              ),
                             ),
                           ),
                           Row(
