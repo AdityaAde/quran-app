@@ -13,7 +13,8 @@ class AppRouter {
         return HomeScreen.route();
       case '/detail-surah':
         return DetailSurahScreen.route(arguments: settings.arguments as Tuple2<BuildContext, SurahModels>);
-
+      case '/bookmarks':
+        return BookmarkScreen.route();
       default:
         return _errorRoute();
     }

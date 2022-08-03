@@ -44,6 +44,18 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           } else if (state is ListSurahLoaded) {
             return Scaffold(
+              floatingActionButton: CircleAvatar(
+                backgroundColor: colorScheme.primary,
+                radius: 30,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/bookmarks');
+                  },
+                  icon: const Icon(Icons.bookmark),
+                  iconSize: 28,
+                  color: Colors.white,
+                ),
+              ),
               appBar: AppBarCustom.appBarCustom(
                 context,
                 'Quran App',

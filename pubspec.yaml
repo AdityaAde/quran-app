@@ -17,6 +17,8 @@ dependencies:
   flutter_bloc: ^8.0.1
   http: ^0.13.4
   tuple: ^2.0.0
+  path_provider: ^2.0.11
+  sqflite: ^2.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0

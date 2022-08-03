@@ -98,6 +98,7 @@ class DetailSurahScreen extends StatelessWidget {
                       colorScheme: colorScheme,
                       textTheme: textTheme,
                       surah: state.surahDetailArabic,
+                      surahName: arguments!.item2.namaLatin!,
                     ),
                   ],
                 ),
