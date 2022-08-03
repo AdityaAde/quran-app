@@ -6,39 +6,13 @@ import '../../models/models.dart';
 
 class DetailSurahRepository extends BaseDetailSurahRepository {
   @override
-  Future<List<Ayah>> getDetailSurah(surahIndex) async {
-    String url = 'http://api.alquran.cloud/v1/surah/$surahIndex/ar.alafasy';
+  Future<SurahDetailModels> getDetailSurah(surahIndex) async {
+    String url = 'https://equran.id/api/surat/1';
     final response = await http.get(Uri.parse(url));
     try {
       if (response.statusCode == 200) {
         final result = jsonDecode(response.body);
-        final detailSurah = ((result as Map<String, dynamic>)['data']['ayahs'] as List)
-            .map(
-              (e) => Ayah.fromJson(e),
-            )
-            .toList();
-        return detailSurah;
-      } else {
-        return throw Exception('Error get detail surah');
-      }
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
-
-  @override
-  Future<List<AyahOnEnglish>> getDetailSurahEnglish(String surahIndex) async {
-    String url = 'http://api.alquran.cloud/v1/surah/$surahIndex/en.asad';
-    final response = await http.get(Uri.parse(url));
-    try {
-      if (response.statusCode == 200) {
-        final result = jsonDecode(response.body);
-        final detailSurah = ((result as Map<String, dynamic>)['data']['ayahs'] as List)
-            .map(
-              (e) => AyahOnEnglish.fromJson(e),
-            )
-            .toList();
-        return detailSurah;
+        return SurahDetailModels.fromJson(result);
       } else {
         return throw Exception('Error get detail surah');
       }

@@ -11,8 +11,9 @@ class AudioSurahLoading extends AudioSurahState {}
 
 class AudioSurahAudioLoaded extends AudioSurahState {
   final String urlSurah;
+  final String surahName;
 
-  const AudioSurahAudioLoaded({required this.urlSurah});
+  const AudioSurahAudioLoaded({required this.urlSurah, required this.surahName});
 
   @override
   List<Object> get props => [urlSurah];

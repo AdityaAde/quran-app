@@ -14,7 +14,7 @@ class ListSurah extends StatelessWidget {
     required this.colorScheme,
   }) : super(key: key);
 
-  final SurahModels listSurah;
+  final List<SurahModels> listSurah;
   final TextTheme textTheme;
   final ColorScheme colorScheme;
 
@@ -24,22 +24,22 @@ class ListSurah extends StatelessWidget {
       builder: (context, state) {
         return Expanded(
           child: ListView.builder(
-              itemCount: listSurah.data!.length,
+              itemCount: listSurah.length,
               itemBuilder: (context, index) {
-                final surah = listSurah.data![index];
+                final surah = listSurah[index];
                 return Column(
                   children: [
                     const SizedBox(height: 10),
                     SurahTile(
-                      surahIndex: surah.number!,
+                      surahIndex: surah.nomor!,
                       textTheme: textTheme,
                       colorScheme: colorScheme,
-                      surahEnglishName: surah.englishName!,
-                      ayahSurah: surah.numberOfAyahs!,
-                      surahArabName: surah.name!,
+                      surahEnglishName: surah.namaLatin!,
+                      ayahSurah: surah.jumlahAyat!,
+                      surahArabName: surah.nama!,
                       onTap: () {
-                        context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: surah.number.toString()));
-                        final Tuple2<BuildContext, Datum> arguments = Tuple2(context, surah);
+                        context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: surah.nomor.toString()));
+                        final Tuple2<BuildContext, SurahModels> arguments = Tuple2(context, surah);
                         Navigator.pushNamed(context, '/detail-surah', arguments: arguments);
                       },
                     ),

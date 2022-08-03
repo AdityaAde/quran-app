@@ -6,7 +6,7 @@ import '../../bloc/bloc.dart';
 import '../../models/surah_models.dart';
 
 class SearchScreen extends SearchDelegate {
-  SurahModels listSurah;
+  List<SurahModels> listSurah;
   SearchScreen({required this.listSurah});
 
   @override
@@ -42,8 +42,8 @@ class SearchScreen extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    List<Datum> suggestions = listSurah.data!.where((searchResult) {
-      final result = searchResult.englishName!.toLowerCase();
+    List<SurahModels> suggestions = listSurah.where((searchResult) {
+      final result = searchResult.namaLatin!.toLowerCase();
       final input = query.toLowerCase();
       return result.contains(input);
     }).toList();
@@ -76,11 +76,11 @@ class SearchScreen extends SearchDelegate {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  suggestion.englishName!,
+                                  suggestion.namaLatin!,
                                   style: textTheme.headline5!.copyWith(fontWeight: FontWeight.w400, fontSize: 15),
                                 ),
                                 Text(
-                                  suggestion.name!,
+                                  suggestion.nama!,
                                   style: textTheme.headline5!.copyWith(fontSize: 12, color: colorScheme.primary),
                                   textDirection: TextDirection.rtl,
                                 )
@@ -90,11 +90,11 @@ class SearchScreen extends SearchDelegate {
                           ],
                         ),
                         onTap: () {
-                          query = suggestion.englishName!;
+                          query = suggestion.namaLatin!;
                           context
                               .read<DetailSurahBloc>()
-                              .add(GetDetailSurahEvent(surahIndex: suggestion.number.toString()));
-                          final Tuple2<BuildContext, Datum> arguments = Tuple2(context, suggestion);
+                              .add(GetDetailSurahEvent(surahIndex: suggestion.nomor.toString()));
+                          final Tuple2<BuildContext, SurahModels> arguments = Tuple2(context, suggestion);
                           Navigator.pushNamed(context, '/detail-surah', arguments: arguments);
                         }),
                   );

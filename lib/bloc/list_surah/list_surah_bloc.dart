@@ -20,9 +20,7 @@ class ListSurahBloc extends Bloc<ListSurahEvent, ListSurahState> {
     final SurahRepository surahRepository = SurahRepository();
     try {
       final listSurah = await surahRepository.getSurah();
-      if (listSurah.code == 200) {
-        emit(ListSurahLoaded(listSurah: listSurah));
-      }
+      emit(ListSurahLoaded(listSurah: listSurah));
     } catch (e) {
       emit(ListSurahError(error: e.toString()));
     }

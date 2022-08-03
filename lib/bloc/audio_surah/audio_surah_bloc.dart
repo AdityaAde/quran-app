@@ -13,6 +13,6 @@ class AudioSurahBloc extends Bloc<AudioSurahEvent, AudioSurahState> {
     PlayAudioSurahEvent event,
     Emitter<AudioSurahState> emit,
   ) {
-    emit(AudioSurahAudioLoaded(urlSurah: event.urlSurahl));
+    emit(AudioSurahAudioLoaded(urlSurah: event.urlSurahl, surahName: event.surahName));
   }
 }

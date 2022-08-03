@@ -10,10 +10,10 @@ import '../../models/surah_models.dart';
 class DetailSurahScreen extends StatelessWidget {
   const DetailSurahScreen({Key? key, this.arguments}) : super(key: key);
 
-  final Tuple2<BuildContext, Datum>? arguments;
+  final Tuple2<BuildContext, SurahModels>? arguments;
 
   static const String routeName = '/detail-surah';
-  static Route route({required Tuple2<BuildContext, Datum>? arguments}) {
+  static Route route({required Tuple2<BuildContext, SurahModels>? arguments}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (_) => DetailSurahScreen(arguments: arguments),
@@ -27,7 +27,7 @@ class DetailSurahScreen extends StatelessWidget {
     return BlocConsumer<DetailSurahBloc, DetailSurahState>(
       listener: (context, state) {
         if (state is DetailSurahError) {
-          context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: arguments!.item2.number.toString()));
+          context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: arguments!.item2.nomor.toString()));
         }
       },
       builder: (context, state) {
@@ -43,7 +43,7 @@ class DetailSurahScreen extends StatelessWidget {
               return Scaffold(
                 appBar: AppBarCustom.appBarCustom(
                   context,
-                  arguments!.item2.englishName!,
+                  arguments!.item2.namaLatin!,
                   textTheme,
                   colorScheme,
                   null,
@@ -60,7 +60,6 @@ class DetailSurahScreen extends StatelessWidget {
                       colorScheme: colorScheme,
                       textTheme: textTheme,
                       surah: state.surahDetailArabic,
-                      surahOnEnglish: state.surahDetailEnglish,
                     ),
                   ],
                 ),

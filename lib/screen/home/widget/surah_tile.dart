@@ -55,7 +55,7 @@ class SurahTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '$ayahSurah Verses',
+                    '$ayahSurah Ayat',
                     style: textTheme.bodyText1!.copyWith(
                       color: colorScheme.onBackground.withOpacity(0.5),
                       fontWeight: FontWeight.w500,

@@ -9,8 +9,9 @@ abstract class AudioSurahEvent extends Equatable {
 
 class PlayAudioSurahEvent extends AudioSurahEvent {
   final String urlSurahl;
+  final String surahName;
 
-  const PlayAudioSurahEvent({required this.urlSurahl});
+  const PlayAudioSurahEvent({required this.urlSurahl, required this.surahName});
 
   @override
   List<Object> get props => [urlSurahl];

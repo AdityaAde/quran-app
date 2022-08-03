@@ -42,14 +42,11 @@ class _AudioSurahState extends State<AudioSurah> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Al-Fatihah',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      const SizedBox(height: 5),
                       Text(
-                        '${indexMusic + 1} / ${urlMusic.length}',
-                        style: const TextStyle(color: Colors.white),
-                      )
+                        state.surahName,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
+                      ),
                     ],
                   ),
                   Row(

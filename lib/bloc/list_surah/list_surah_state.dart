@@ -10,7 +10,7 @@ abstract class ListSurahState extends Equatable {
 class ListSurahLoading extends ListSurahState {}
 
 class ListSurahLoaded extends ListSurahState {
-  final SurahModels listSurah;
+  final List<SurahModels> listSurah;
 
   const ListSurahLoaded({required this.listSurah});
 

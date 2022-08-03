@@ -20,7 +20,7 @@ class HeaderHome extends StatelessWidget {
               width: double.infinity,
             ),
             Positioned(
-              top: 50,
+              top: 45,
               left: 13,
               child: RichText(
                 text: TextSpan(
@@ -32,11 +32,11 @@ class HeaderHome extends StatelessWidget {
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Aditya Ade',
+                      text: 'Sudah Baca Surah \nApa Hari Ini?',
                       style: textTheme.subtitle1!.copyWith(
                         fontWeight: FontWeight.w500,
                         color: colorScheme.background,
-                        fontSize: 17,
+                        fontSize: 16,
                       ),
                     ),
                   ],

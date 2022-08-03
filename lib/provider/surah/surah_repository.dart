@@ -6,12 +6,14 @@ import '../../models/surah_models.dart';
 
 class SurahRepository extends BaseSurahRepository {
   @override
-  Future<SurahModels> getSurah() async {
-    final response = await http.get(Uri.parse('http://api.alquran.cloud/v1/surah'));
+  Future<List<SurahModels>> getSurah() async {
+    final response = await http.get(Uri.parse('https://equran.id/api/surat'));
     try {
       if (response.statusCode == 200) {
         final result = jsonDecode(response.body);
-        return SurahModels.fromJson(result);
+        final data = result as List;
+        List<SurahModels> listSurah = data.map((surah) => SurahModels.fromJson(surah)).toList();
+        return listSurah;
       } else {
         return throw Exception('Error get surah');
       }

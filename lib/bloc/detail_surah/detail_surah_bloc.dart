@@ -17,15 +17,11 @@ class DetailSurahBloc extends Bloc<DetailSurahEvent, DetailSurahState> {
     Emitter<DetailSurahState> emit,
   ) async {
     final DetailSurahRepository detailSurahRepository = DetailSurahRepository();
-    final List<Ayah> listSurahDetailArabic = [];
-    final List<AyahOnEnglish> listSurahDetailEnglish = [];
     emit(DetailSurahLoading());
     try {
       final surahDetailArabic = await detailSurahRepository.getDetailSurah(event.surahIndex);
-      final surahDetailEnglish = await detailSurahRepository.getDetailSurahEnglish(event.surahIndex);
-      listSurahDetailArabic.addAll(surahDetailArabic);
-      listSurahDetailEnglish.addAll(surahDetailEnglish);
-      emit(DetailSurahLoaded(surahDetailArabic: listSurahDetailArabic, surahDetailEnglish: listSurahDetailEnglish));
+
+      emit(DetailSurahLoaded(surahDetailArabic: surahDetailArabic));
     } catch (e) {
       return emit(DetailSurahError(error: e.toString()));
     }

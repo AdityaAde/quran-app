@@ -1,7 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/bloc/audio_surah/audio_surah_bloc.dart';
 
 import '../../../models/models.dart';
 
@@ -11,24 +9,20 @@ class DetailSurahBody extends StatelessWidget {
     required this.colorScheme,
     required this.textTheme,
     required this.surah,
-    required this.surahOnEnglish,
   }) : super(key: key);
 
   final ColorScheme colorScheme;
   final TextTheme textTheme;
-  final List<Ayah> surah;
-  final List<AyahOnEnglish> surahOnEnglish;
+  final SurahDetailModels surah;
   final AudioPlayer audioPLayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: surah.length,
+        itemCount: surah.ayat!.length,
         itemBuilder: (context, index) {
-          final surahDetail = surah[index];
-          final translateSurah = surahOnEnglish[index];
-          final translateSurahReplace = translateSurah.text!.replaceAll('"', '');
+          final surahDetail = surah.ayat![index];
           final indexSurah = index + 1;
 
           return Column(
@@ -59,21 +53,6 @@ class DetailSurahBody extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              BlocBuilder<AudioSurahBloc, AudioSurahState>(
-                                builder: (context, state) {
-                                  return IconButton(
-                                      onPressed: () async {
-                                        context
-                                            .read<AudioSurahBloc>()
-                                            .add(PlayAudioSurahEvent(urlSurahl: surahDetail.audio!));
-                                      },
-                                      icon: Icon(
-                                        Icons.play_arrow_outlined,
-                                        color: colorScheme.primary,
-                                        size: 30,
-                                      ));
-                                },
-                              ),
                               IconButton(
                                 onPressed: () {
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -99,7 +78,7 @@ class DetailSurahBody extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    surahDetail.text!,
+                    surahDetail.ar!,
                     style: textTheme.bodyLarge!.copyWith(fontSize: 20),
                     textDirection: TextDirection.rtl,
                   ),
@@ -111,7 +90,7 @@ class DetailSurahBody extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    translateSurahReplace,
+                    surahDetail.idn!,
                     style: textTheme.bodyLarge!.copyWith(fontSize: 15, fontWeight: FontWeight.w400),
                     textDirection: TextDirection.ltr,
                   ),

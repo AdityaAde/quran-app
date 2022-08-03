@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/models/surah_models.dart';
 import 'package:tuple/tuple.dart';
 
-import '../models/surah_models.dart';
 import '../screen/screen.dart';
 
 class AppRouter {
@@ -12,7 +12,7 @@ class AppRouter {
       case '/home':
         return HomeScreen.route();
       case '/detail-surah':
-        return DetailSurahScreen.route(arguments: settings.arguments as Tuple2<BuildContext, Datum>);
+        return DetailSurahScreen.route(arguments: settings.arguments as Tuple2<BuildContext, SurahModels>);
 
       default:
         return _errorRoute();

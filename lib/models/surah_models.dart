@@ -1,65 +1,46 @@
-// To parse this JSON data, do
-//
-//     final surahModels = surahModelsFromJson(jsonString);
-
 import 'dart:convert';
 
-SurahModels surahModelsFromJson(String str) => SurahModels.fromJson(json.decode(str));
+List<SurahModels> surahModelsFromJson(String str) =>
+    List<SurahModels>.from(json.decode(str).map((x) => SurahModels.fromJson(x)));
 
-String surahModelsToJson(SurahModels data) => json.encode(data.toJson());
+String surahModelsToJson(List<SurahModels> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class SurahModels {
   SurahModels({
-    this.code,
-    this.status,
-    this.data,
+    this.nomor,
+    this.nama,
+    this.namaLatin,
+    this.jumlahAyat,
+    this.arti,
+    this.deskripsi,
+    this.audio,
   });
 
-  int? code;
-  String? status;
-  List<Datum>? data;
+  int? nomor;
+  String? nama;
+  String? namaLatin;
+  int? jumlahAyat;
+  String? arti;
+  String? deskripsi;
+  String? audio;
 
   factory SurahModels.fromJson(Map<String, dynamic> json) => SurahModels(
-        code: json["code"],
-        status: json["status"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        nomor: json["nomor"],
+        nama: json["nama"],
+        namaLatin: json["nama_latin"],
+        jumlahAyat: json["jumlah_ayat"],
+        arti: json["arti"],
+        deskripsi: json["deskripsi"],
+        audio: json["audio"],
       );
 
   Map<String, dynamic> toJson() => {
-        "code": code,
-        "status": status,
-        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
-      };
-}
-
-class Datum {
-  Datum({
-    this.number,
-    this.name,
-    this.englishName,
-    this.englishNameTranslation,
-    this.numberOfAyahs,
-  });
-
-  int? number;
-  String? name;
-  String? englishName;
-  String? englishNameTranslation;
-  int? numberOfAyahs;
-
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        number: json["number"],
-        name: json["name"],
-        englishName: json["englishName"],
-        englishNameTranslation: json["englishNameTranslation"],
-        numberOfAyahs: json["numberOfAyahs"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "number": number,
-        "name": name,
-        "englishName": englishName,
-        "englishNameTranslation": englishNameTranslation,
-        "numberOfAyahs": numberOfAyahs,
+        "nomor": nomor,
+        "nama": nama,
+        "nama_latin": namaLatin,
+        "jumlah_ayat": jumlahAyat,
+        "arti": arti,
+        "deskripsi": deskripsi,
+        "audio": audio,
       };
 }
