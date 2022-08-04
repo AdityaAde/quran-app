@@ -70,11 +70,12 @@ class BookmarkScreen extends StatelessWidget {
             child: ListTile(
               onTap: () {},
               leading: CircleAvatar(
+                  backgroundImage: const AssetImage('assets/images/border.png'),
                   radius: 17,
-                  backgroundColor: colorScheme.primary,
+                  backgroundColor: Colors.transparent,
                   child: Text(
                     "${index + 1}",
-                    style: textTheme.bodyLarge!.copyWith(color: Colors.white),
+                    style: textTheme.bodyLarge!.copyWith(color: Colors.black),
                   )),
               title: Text(data['surah'].toString().replaceAll("+", "'")),
               subtitle: Text(
@@ -82,7 +83,12 @@ class BookmarkScreen extends StatelessWidget {
                 style: textTheme.bodyLarge!.copyWith(color: Colors.black.withOpacity(0.6)),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<BookmarkBloc>().add(DeleteBookmarkEvent(id: data['id']));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Berhasil hapus bookmark')),
+                  );
+                },
                 icon: const Icon(Icons.delete),
                 color: Colors.red,
               ),

@@ -30,18 +30,15 @@ class SurahTile extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(children: [
-                Image.asset('assets/images/border.png'),
-                Positioned(
-                  bottom: 8,
-                  left: (surahIndex < 10
-                      ? 16
-                      : surahIndex <= 99
-                          ? 13
-                          : 11),
-                  child: Text(surahIndex.toString(), style: textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700)),
+              CircleAvatar(
+                backgroundImage: const AssetImage('assets/images/border.png'),
+                radius: 17,
+                backgroundColor: Colors.transparent,
+                child: Text(
+                  surahIndex.toString(),
+                  style: textTheme.bodyLarge!.copyWith(color: Colors.black),
                 ),
-              ]),
+              ),
               const SizedBox(width: 15),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

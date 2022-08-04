@@ -13,6 +13,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   BookmarkBloc() : super(BookmarkLoading()) {
     on<AddBookmarkEvent>(_onAddBookmarkEvent);
     on<GetBookmarkEvent>(_onGetBookmarkEvent);
+    on<DeleteBookmarkEvent>(_onDeleteBookmarkEvent);
   }
 
   void _onAddBookmarkEvent(
@@ -48,6 +49,16 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       }
     } catch (e) {
       emit(GetBookmarkError(error: e.toString()));
+    }
+  }
+
+  void _onDeleteBookmarkEvent(DeleteBookmarkEvent event, Emitter<BookmarkState> emit) async {
+    await bookmarkRepository.deleteBookmark(event.id);
+    final listBookmarks = await bookmarkRepository.getBookmark();
+    if (listBookmarks.isEmpty) {
+      emit(GetBookmarkEmpty());
+    } else {
+      emit(GetBookmarkLoadedState(listBookmarks: listBookmarks));
     }
   }
 }

@@ -27,3 +27,12 @@ class AddBookmarkEvent extends BookmarkEvent {
 }
 
 class GetBookmarkEvent extends BookmarkEvent {}
+
+class DeleteBookmarkEvent extends BookmarkEvent {
+  final int id;
+
+  const DeleteBookmarkEvent({required this.id});
+
+  @override
+  List<Object> get props => [id];
+}
