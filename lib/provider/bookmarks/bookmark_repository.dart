@@ -49,4 +49,19 @@ class BookmarkRepository extends BaseBookmarkRepository {
     Database db = await database.db;
     await db.delete("bookmark", where: "id = $id");
   }
+
+  @override
+  Future<Map<String, dynamic>?> getLastRead() async {
+    Database db = await database.db;
+    final List<Map<String, dynamic>> dataLastRead = await db.query(
+      "bookmark",
+      where: "last_read = 1",
+    );
+    if (dataLastRead.isEmpty) {
+      // Tidak ada data lastread
+      return null;
+    } else {
+      return dataLastRead.first;
+    }
+  }
 }

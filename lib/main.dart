@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<BookmarkBloc>(
           create: (context) => BookmarkBloc(),
-        )
+        ),
       ],
       child: MaterialApp(
         title: 'Quran App',

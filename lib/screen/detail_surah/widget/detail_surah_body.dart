@@ -101,7 +101,7 @@ class DetailSurahBody extends StatelessWidget {
                                                       indexAyat: indexSurah,
                                                       context: context,
                                                     ));
-
+                                                context.read<BookmarkBloc>().add(GetLastReadEvent());
                                                 ScaffoldMessenger.of(context).showSnackBar(
                                                   const SnackBar(content: Text('Berhasil Menambahkan Last Read')),
                                                 );

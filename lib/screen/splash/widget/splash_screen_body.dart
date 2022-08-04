@@ -76,6 +76,7 @@ class SplashScreenBody extends StatelessWidget {
           ),
           onTap: () {
             context.read<ListSurahBloc>().add(GetSurahEvent());
+            context.read<BookmarkBloc>().add(GetLastReadEvent());
             Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
           }),
     );

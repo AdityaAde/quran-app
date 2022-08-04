@@ -53,4 +53,5 @@ abstract class BaseBookmarkRepository {
   Future<void> addBookmark(bool lastRead, String namaSurah, Ayat surah, int indexAyat, BuildContext context);
   Future<List<Map<String, dynamic>>> getBookmark();
   Future<void> deleteBookmark(int id);
+  Future<Map<String, dynamic>?> getLastRead();
 }
