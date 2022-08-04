@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/bloc/audio_surah/audio_surah_bloc.dart';
 import 'package:tuple/tuple.dart';
 
+import '../../../bloc/bloc.dart';
 import '../../../models/surah_models.dart';
 
 class HeaderTitleSurah extends StatelessWidget {

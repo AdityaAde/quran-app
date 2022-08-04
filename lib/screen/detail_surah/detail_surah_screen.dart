@@ -36,80 +36,51 @@ class DetailSurahScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is DetailSurahLoading) {
               return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
+                body: Loading(),
               );
             } else if (state is DetailSurahLoaded) {
-              return Scaffold(
-                appBar: AppBarCustom.appBarCustom(
-                  context,
-                  arguments!.item2.namaLatin!,
-                  textTheme,
-                  colorScheme,
-                  IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (builder) {
-                            return Container(
-                              color: Colors.transparent,
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
-                                child: ListTile(
-                                  title: Text(
-                                    'Penjelasan Surah',
-                                    style: textTheme.headline3!.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  subtitle: Padding(
-                                    padding: const EdgeInsets.only(top: 15),
-                                    child: Text(
-                                      descriptionSurah.replaceAll('<i>', ''),
-                                      style: textTheme.bodyLarge,
-                                      textAlign: TextAlign.justify,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          });
-                    },
-                    icon: Icon(
-                      Icons.info_outline,
-                      color: colorScheme.onPrimary,
-                    ),
-                  ),
-                ),
-                body: Column(
-                  children: [
-                    const SizedBox(height: 15),
-                    HeaderTitleSurah(
-                      arguments: arguments,
-                      textTheme: textTheme,
-                      colorScheme: colorScheme,
-                    ),
-                    DetailSurahBody(
-                      colorScheme: colorScheme,
-                      textTheme: textTheme,
-                      surah: state.surahDetailArabic,
-                      surahName: arguments!.item2.namaLatin!,
-                    ),
-                  ],
-                ),
-                bottomNavigationBar: const AudioSurah(),
-              );
+              return _surahLoaded(context, textTheme, colorScheme, descriptionSurah, state);
             } else {
               return const Center(child: Text('Something Went Wrong'));
             }
           },
         );
       },
+    );
+  }
+
+  Scaffold _surahLoaded(
+    BuildContext context,
+    TextTheme textTheme,
+    ColorScheme colorScheme,
+    String descriptionSurah,
+    DetailSurahLoaded state,
+  ) {
+    return Scaffold(
+      appBar: AppBarCustom.appBarCustom(
+        context,
+        arguments!.item2.namaLatin!,
+        textTheme,
+        colorScheme,
+        InfoSurah(textTheme: textTheme, descriptionSurah: descriptionSurah, colorScheme: colorScheme),
+      ),
+      body: Column(
+        children: [
+          const SizedBox(height: 15),
+          HeaderTitleSurah(
+            arguments: arguments,
+            textTheme: textTheme,
+            colorScheme: colorScheme,
+          ),
+          DetailSurahBody(
+            colorScheme: colorScheme,
+            textTheme: textTheme,
+            surah: state.surahDetailArabic,
+            surahName: arguments!.item2.namaLatin!,
+          ),
+        ],
+      ),
+      bottomNavigationBar: const AudioSurah(),
     );
   }
 }

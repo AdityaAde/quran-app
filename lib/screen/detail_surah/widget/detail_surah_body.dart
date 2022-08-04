@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:quran_app/provider/bookmarks/bookmark_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/bloc/bloc.dart';
 
 import '../../../models/models.dart';
 
@@ -30,9 +31,9 @@ class DetailSurahBody extends StatelessWidget {
 
           return Column(
             children: [
-              headerSurah(indexSurah, context, surahDetail),
+              _headerSurah(indexSurah, context, surahDetail),
               const SizedBox(height: 15),
-              bodySurah(surahDetail),
+              _bodySurah(surahDetail),
               const SizedBox(height: 30),
             ],
           );
@@ -41,8 +42,7 @@ class DetailSurahBody extends StatelessWidget {
     );
   }
 
-  Padding headerSurah(int indexSurah, BuildContext context, Ayat surahDetail) {
-    BookmarkRepository bookmarkRepository = BookmarkRepository();
+  Padding _headerSurah(int indexSurah, BuildContext context, Ayat surahDetail) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 28),
       child: Container(
@@ -77,53 +77,69 @@ class DetailSurahBody extends StatelessWidget {
                         showModalBottomSheet(
                             context: context,
                             builder: (builder) {
-                              return Container(
-                                color: Colors.transparent,
-                                child: Container(
-                                    height: 100,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0))),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(fixedSize: const Size(100, 30)),
-                                          onPressed: () async {
-                                            Navigator.pop(context);
-                                            bookmarkRepository.addBookmark(
-                                                true, surahName, surahDetail, indexSurah, context);
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              const SnackBar(content: Text('Berhasil Menambahkan Last Read')),
-                                            );
-                                          },
-                                          child: Text(
-                                            'Last Read',
-                                            style: textTheme.bodyLarge!.copyWith(
-                                              color: Colors.white,
+                              return BlocBuilder<BookmarkBloc, BookmarkState>(
+                                builder: (context, state) {
+                                  return Container(
+                                    color: Colors.transparent,
+                                    child: Container(
+                                        height: 100,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0))),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(fixedSize: const Size(100, 30)),
+                                              onPressed: () async {
+                                                Navigator.pop(context);
+                                                context.read<BookmarkBloc>().add(AddBookmarkEvent(
+                                                      lastRead: true,
+                                                      namaSurah: surahName,
+                                                      surah: surahDetail,
+                                                      indexAyat: indexSurah,
+                                                      context: context,
+                                                    ));
+
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  const SnackBar(content: Text('Berhasil Menambahkan Last Read')),
+                                                );
+                                              },
+                                              child: Text(
+                                                'Last Read',
+                                                style: textTheme.bodyLarge!.copyWith(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(fixedSize: const Size(100, 30)),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                            bookmarkRepository.addBookmark(
-                                                false, surahName, surahDetail, indexSurah, context);
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              const SnackBar(content: Text('Berhasil Menambahkan Bookmark')),
-                                            );
-                                          },
-                                          child: Text(
-                                            'Bookmark',
-                                            style: textTheme.bodyLarge!.copyWith(
-                                              color: Colors.white,
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(fixedSize: const Size(100, 30)),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                                context.read<BookmarkBloc>().add(AddBookmarkEvent(
+                                                      lastRead: false,
+                                                      namaSurah: surahName,
+                                                      surah: surahDetail,
+                                                      indexAyat: indexSurah,
+                                                      context: context,
+                                                    ));
+
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  const SnackBar(content: Text('Berhasil Menambahkan Bookmark')),
+                                                );
+                                              },
+                                              child: Text(
+                                                'Bookmark',
+                                                style: textTheme.bodyLarge!.copyWith(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      ],
-                                    )),
+                                          ],
+                                        )),
+                                  );
+                                },
                               );
                             });
                       },
@@ -142,7 +158,7 @@ class DetailSurahBody extends StatelessWidget {
     );
   }
 
-  Column bodySurah(Ayat surahDetail) {
+  Column _bodySurah(Ayat surahDetail) {
     return Column(
       children: [
         Padding(

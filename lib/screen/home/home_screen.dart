@@ -38,62 +38,53 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, state) {
           if (state is ListSurahLoading) {
             return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
+              body: Loading(),
             );
           } else if (state is ListSurahLoaded) {
-            return Scaffold(
-              floatingActionButton: CircleAvatar(
-                backgroundColor: colorScheme.primary,
-                radius: 30,
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/bookmarks');
-                  },
-                  icon: const Icon(Icons.bookmark),
-                  iconSize: 28,
-                  color: Colors.white,
-                ),
-              ),
-              appBar: AppBarCustom.appBarCustom(
-                context,
-                'Quran App',
-                textTheme,
-                colorScheme,
-                IconButton(
-                  onPressed: () {
-                    showSearch(context: context, delegate: SearchScreen(listSurah: state.listSurah));
-                  },
-                  icon: Icon(
-                    Icons.search,
-                    color: colorScheme.onBackground.withOpacity(0.5),
-                  ),
-                ),
-              ),
-              body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  children: [
-                    HeaderHome(
-                      textTheme: textTheme,
-                      colorScheme: colorScheme,
-                    ),
-                    const SizedBox(height: 15),
-                    ListSurah(
-                      listSurah: state.listSurah,
-                      textTheme: textTheme,
-                      colorScheme: colorScheme,
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return _listSurah(context, textTheme, colorScheme, state);
           } else {
             return const Center(child: Text('Terjadi Kesalahan'));
           }
         },
       );
     });
+  }
+
+  Scaffold _listSurah(BuildContext context, TextTheme textTheme, ColorScheme colorScheme, ListSurahLoaded state) {
+    return Scaffold(
+      floatingActionButton: const FloatingButton(),
+      appBar: AppBarCustom.appBarCustom(
+        context,
+        'Quran App',
+        textTheme,
+        colorScheme,
+        IconButton(
+          onPressed: () {
+            showSearch(context: context, delegate: SearchScreen(listSurah: state.listSurah));
+          },
+          icon: Icon(
+            Icons.search,
+            color: colorScheme.onBackground.withOpacity(0.5),
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            HeaderHome(
+              textTheme: textTheme,
+              colorScheme: colorScheme,
+            ),
+            const SizedBox(height: 15),
+            ListSurah(
+              listSurah: state.listSurah,
+              textTheme: textTheme,
+              colorScheme: colorScheme,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

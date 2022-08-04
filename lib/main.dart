@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/bloc/audio_surah/audio_surah_bloc.dart';
 import 'config/config.dart';
 
 import 'bloc/bloc.dart';
@@ -31,6 +30,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<AudioSurahBloc>(
           create: (context) => AudioSurahBloc(),
         ),
+        BlocProvider<BookmarkBloc>(
+          create: (context) => BookmarkBloc(),
+        )
       ],
       child: MaterialApp(
         title: 'Quran App',

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/models/models.dart';
-import 'package:quran_app/provider/bookmarks/base_bookmark_repository.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../../models/models.dart';
+import 'base_bookmark_repository.dart';
 
 class BookmarkRepository extends BaseBookmarkRepository {
   DatabaseManager database = DatabaseManager.instance;
@@ -34,9 +35,6 @@ class BookmarkRepository extends BaseBookmarkRepository {
         "last_read": lastRead == true ? 1 : 0,
       });
     }
-
-    var data = await db.query("bookmark");
-    print(data);
   }
 
   @override

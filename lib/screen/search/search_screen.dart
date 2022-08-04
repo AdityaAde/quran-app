@@ -67,41 +67,43 @@ class SearchScreen extends SearchDelegate {
                 itemCount: suggestions.length,
                 itemBuilder: (context, index) {
                   final suggestion = suggestions[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  suggestion.namaLatin!,
-                                  style: textTheme.headline5!.copyWith(fontWeight: FontWeight.w400, fontSize: 15),
-                                ),
-                                Text(
-                                  suggestion.nama!,
-                                  style: textTheme.headline5!.copyWith(fontSize: 12, color: colorScheme.primary),
-                                  textDirection: TextDirection.rtl,
-                                )
-                              ],
-                            ),
-                            Divider(thickness: 1, color: colorScheme.primary.withOpacity(0.2)),
-                          ],
-                        ),
-                        onTap: () {
-                          query = suggestion.namaLatin!;
-                          context
-                              .read<DetailSurahBloc>()
-                              .add(GetDetailSurahEvent(surahIndex: suggestion.nomor.toString()));
-                          final Tuple2<BuildContext, SurahModels> arguments = Tuple2(context, suggestion);
-                          Navigator.pushNamed(context, '/detail-surah', arguments: arguments);
-                        }),
-                  );
+                  return _searchTile(suggestion, textTheme, colorScheme, context);
                 }),
           ),
         ],
       ),
+    );
+  }
+
+  Padding _searchTile(SurahModels suggestion, TextTheme textTheme, ColorScheme colorScheme, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    suggestion.namaLatin!,
+                    style: textTheme.headline5!.copyWith(fontWeight: FontWeight.w400, fontSize: 15),
+                  ),
+                  Text(
+                    suggestion.nama!,
+                    style: textTheme.headline5!.copyWith(fontSize: 12, color: colorScheme.primary),
+                    textDirection: TextDirection.rtl,
+                  )
+                ],
+              ),
+              Divider(thickness: 1, color: colorScheme.primary.withOpacity(0.2)),
+            ],
+          ),
+          onTap: () {
+            query = suggestion.namaLatin!;
+            context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: suggestion.nomor.toString()));
+            final Tuple2<BuildContext, SurahModels> arguments = Tuple2(context, suggestion);
+            Navigator.pushNamed(context, '/detail-surah', arguments: arguments);
+          }),
     );
   }
 }
