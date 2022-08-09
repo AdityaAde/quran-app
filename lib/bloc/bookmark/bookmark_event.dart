@@ -28,8 +28,6 @@ class AddBookmarkEvent extends BookmarkEvent {
 
 class GetBookmarkEvent extends BookmarkEvent {}
 
-class GetLastReadEvent extends BookmarkEvent {}
-
 class DeleteBookmarkEvent extends BookmarkEvent {
   final int id;
 

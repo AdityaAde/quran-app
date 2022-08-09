@@ -33,6 +33,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<BookmarkBloc>(
           create: (context) => BookmarkBloc(),
         ),
+        BlocProvider(
+          create: (context) => LastReadBloc(),
+        ),
       ],
       child: MaterialApp(
         title: 'Quran App',

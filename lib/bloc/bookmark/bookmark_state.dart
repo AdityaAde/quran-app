@@ -22,15 +22,6 @@ class GetBookmarkLoadedState extends BookmarkState {
   List<Object> get props => [listBookmarks];
 }
 
-class GetLastReadLoaded extends BookmarkState {
-  final Map<String, dynamic> lastRead;
-
-  const GetLastReadLoaded({required this.lastRead});
-
-  @override
-  List<Object> get props => [lastRead];
-}
-
 class GetBookmarkError extends BookmarkState {
   final String error;
 

@@ -14,7 +14,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     on<AddBookmarkEvent>(_onAddBookmarkEvent);
     on<GetBookmarkEvent>(_onGetBookmarkEvent);
     on<DeleteBookmarkEvent>(_onDeleteBookmarkEvent);
-    on<GetLastReadEvent>(_onGetLasReadEvent);
   }
 
   void _onAddBookmarkEvent(
@@ -60,15 +59,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       emit(GetBookmarkEmpty());
     } else {
       emit(GetBookmarkLoadedState(listBookmarks: listBookmarks));
-    }
-  }
-
-  void _onGetLasReadEvent(GetLastReadEvent event, Emitter<BookmarkState> emit) async {
-    try {
-      final Map<String, dynamic>? dataLastRead = await bookmarkRepository.getLastRead();
-      emit(GetLastReadLoaded(lastRead: dataLastRead!));
-    } catch (e) {
-      emit(GetBookmarkError(error: e.toString()));
     }
   }
 }

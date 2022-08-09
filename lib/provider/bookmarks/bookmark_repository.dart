@@ -35,6 +35,8 @@ class BookmarkRepository extends BaseBookmarkRepository {
         "last_read": lastRead == true ? 1 : 0,
       });
     }
+    /* var data = await db.query("bookmark");
+    print(data) */
   }
 
   @override

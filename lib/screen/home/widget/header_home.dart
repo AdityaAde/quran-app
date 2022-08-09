@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/bloc/bloc.dart';
+
+import '../../../bloc/bloc.dart';
 
 class HeaderHome extends StatelessWidget {
   const HeaderHome({Key? key, required this.textTheme, required this.colorScheme}) : super(key: key);
@@ -11,16 +12,16 @@ class HeaderHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return BlocConsumer<BookmarkBloc, BookmarkState>(
+    return BlocConsumer<LastReadBloc, LastReadState>(
       listener: (context, state) {
-        if (state is GetBookmarkError) {
-          context.read<BookmarkBloc>().add(GetLastReadEvent());
+        if (state is LastReadError) {
+          context.read<LastReadBloc>().add(GetLastReadEvent());
         }
       },
       builder: (context, state) {
-        return BlocBuilder<BookmarkBloc, BookmarkState>(
+        return BlocBuilder<LastReadBloc, LastReadState>(
           builder: (context, state) {
-            if (state is GetLastReadLoaded) {
+            if (state is LastReadLoaded) {
               return _headerHome(
                 textTheme,
                 '${state.lastRead['surah']}',
