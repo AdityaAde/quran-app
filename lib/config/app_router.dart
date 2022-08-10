@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quran_app/models/surah_models.dart';
 import 'package:tuple/tuple.dart';
 
-import '../screen/screen.dart';
+import '../bundles/bundles.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {

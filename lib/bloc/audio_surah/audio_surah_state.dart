@@ -9,12 +9,17 @@ abstract class AudioSurahState extends Equatable {
 
 class AudioSurahLoading extends AudioSurahState {}
 
-class AudioSurahAudioLoaded extends AudioSurahState {
+class AudioSurahLoaded extends AudioSurahState {
   final String urlSurah;
   final String surahName;
+  final bool isPlay;
 
-  const AudioSurahAudioLoaded({required this.urlSurah, required this.surahName});
+  const AudioSurahLoaded({
+    required this.urlSurah,
+    required this.surahName,
+    required this.isPlay,
+  });
 
   @override
-  List<Object> get props => [urlSurah];
+  List<Object> get props => [urlSurah, surahName, isPlay];
 }

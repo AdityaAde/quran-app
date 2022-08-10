@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Quran App',
         theme: theme(),
         onGenerateRoute: AppRouter.onGenerateRoute,

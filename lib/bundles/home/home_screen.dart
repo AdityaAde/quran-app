@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/bloc.dart';
 import '../../components/components.dart';
-import '../screen.dart';
+import '../bundles.dart';
 import 'widget/widget.dart';
 
 class HomeScreen extends StatefulWidget {

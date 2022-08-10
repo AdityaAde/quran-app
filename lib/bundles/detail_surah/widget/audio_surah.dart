@@ -18,6 +18,7 @@ class _AudioSurahState extends State<AudioSurah> {
   bool isPlaying = false;
   int indexMusic = 0;
   bool isRepeat = false;
+  bool isPlay = false;
 
   List<String> urlMusic = [];
 
@@ -29,18 +30,27 @@ class _AudioSurahState extends State<AudioSurah> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AudioSurahBloc, AudioSurahState>(
-      builder: (context, state) {
-        if (state is AudioSurahAudioLoaded) {
-          return _audioSurahLoaded(state, context);
-        } else {
-          return const SizedBox();
+    return BlocConsumer<AudioSurahBloc, AudioSurahState>(
+      listener: (context, state) {
+        if (state is AudioSurahLoaded) {
+          state.isPlay ? audioPLayer.play(UrlSource(state.urlSurah)) : audioPLayer.pause();
         }
+      },
+      builder: (context, state) {
+        return BlocBuilder<AudioSurahBloc, AudioSurahState>(
+          builder: (context, state) {
+            if (state is AudioSurahLoaded) {
+              return _audioSurahLoaded(state, context);
+            } else {
+              return const SizedBox();
+            }
+          },
+        );
       },
     );
   }
 
-  Container _audioSurahLoaded(AudioSurahAudioLoaded state, BuildContext context) {
+  Container _audioSurahLoaded(AudioSurahLoaded state, BuildContext context) {
     return Container(
       color: Colors.white,
       height: 70,
@@ -81,18 +91,17 @@ class _AudioSurahState extends State<AudioSurah> {
                       });
                       audioPLayer.pause();
                     } else {
-                      /// TODO: Bug ketika menjalankan audio
-
                       audioPLayer.onPlayerStateChanged.listen((state) {
                         setState(() {
                           isPlaying = state == PlayerState.playing;
                         });
                       });
                       audioPLayer.play(UrlSource(state.urlSurah));
+                      isPlay = state.isPlay;
                     }
                   },
                   icon: Icon(
-                    isPlaying ? Icons.pause : Icons.play_arrow,
+                    state.isPlay ? Icons.pause : Icons.play_arrow,
                     color: const Color(0xff672CBC),
                   ),
                   iconSize: 30,
