@@ -15,17 +15,33 @@ class AudioSurah extends StatefulWidget {
 
 class _AudioSurahState extends State<AudioSurah> {
   final audioPLayer = AudioPlayer();
-  bool isPlaying = false;
-  int indexMusic = 0;
   bool isRepeat = false;
   bool isPlay = false;
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
 
-  List<String> urlMusic = [];
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
     super.dispose();
     audioPLayer.dispose();
+  }
+
+  String formatTime(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final hours = twoDigits(duration.inHours);
+    final minutes = twoDigits(duration.inMinutes);
+    final seconds = twoDigits(duration.inSeconds);
+
+    return [
+      if (duration.inHours > 0) hours,
+      minutes,
+      seconds,
+    ].join(':');
   }
 
   @override
@@ -34,6 +50,27 @@ class _AudioSurahState extends State<AudioSurah> {
       listener: (context, state) {
         if (state is AudioSurahLoaded) {
           state.isPlay ? audioPLayer.play(UrlSource(state.urlSurah)) : audioPLayer.pause();
+
+          /// Listen to states : Playing, Pause, Stop
+          audioPLayer.onPlayerStateChanged.listen((condition) {
+            setState(() {
+              isPlay = condition == PlayerState.playing;
+            });
+          });
+
+          /// Listen to Audio Duration
+          audioPLayer.onDurationChanged.listen((newDuration) {
+            setState(() {
+              duration = newDuration;
+            });
+          });
+
+          /// Listen to Audio Position
+          audioPLayer.onPositionChanged.listen((newDuration) {
+            setState(() {
+              position = newDuration;
+            });
+          });
         }
       },
       builder: (context, state) {
@@ -52,90 +89,54 @@ class _AudioSurahState extends State<AudioSurah> {
 
   Container _audioSurahLoaded(AudioSurahLoaded state, BuildContext context) {
     return Container(
-      color: Colors.white,
-      height: 70,
+      color: Colors.black.withOpacity(0.1),
+      height: 75,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 30, top: 6),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 5),
                 Text(
                   state.surahName,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () async {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Not implemented yet.')),
-                    );
-                  },
-                  icon: const Icon(Icons.skip_previous, color: Color(0xff672CBC)),
-                  iconSize: 30,
-                ),
-                const SizedBox(width: 15),
-                IconButton(
-                  onPressed: () async {
-                    if (isPlaying) {
-                      audioPLayer.onPlayerStateChanged.listen((state) {
-                        setState(() {
-                          isPlaying = state == PlayerState.stopped;
-                        });
-                      });
-                      audioPLayer.pause();
-                    } else {
-                      audioPLayer.onPlayerStateChanged.listen((state) {
-                        setState(() {
-                          isPlaying = state == PlayerState.playing;
-                        });
-                      });
-                      audioPLayer.play(UrlSource(state.urlSurah));
-                      isPlay = state.isPlay;
-                    }
-                  },
-                  icon: Icon(
-                    state.isPlay ? Icons.pause : Icons.play_arrow,
-                    color: const Color(0xff672CBC),
-                  ),
-                  iconSize: 30,
-                ),
-                const SizedBox(width: 15),
-                IconButton(
-                  onPressed: () async {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Not implemented yet.')),
-                    );
-                  },
-                  icon: const Icon(
-                    Icons.skip_next,
-                    color: Color(0xff672CBC),
-                  ),
-                  iconSize: 30,
+                Row(
+                  children: [
+                    Text(formatTime(position)),
+                    Slider(
+                      min: 0,
+                      max: duration.inSeconds.toDouble(),
+                      value: position.inSeconds.toDouble(),
+                      onChanged: (value) async {
+                        final position = Duration(seconds: value.toInt());
+                        await audioPLayer.seek(position);
+                        //await audioPLayer.resume();
+                      },
+                    ),
+                    Text(formatTime(duration - position)),
+                  ],
                 ),
               ],
             ),
+            const SizedBox(width: 15),
             IconButton(
-                onPressed: () {
-                  setState(() {
-                    isRepeat = !isRepeat;
-                  });
-                  if (isRepeat == true) {
-                    audioPLayer.setReleaseMode(ReleaseMode.loop);
-                  } else {
-                    audioPLayer.setReleaseMode(ReleaseMode.stop);
-                  }
-                },
-                icon: Icon(
-                  Icons.repeat,
-                  color: isRepeat ? const Color(0xff672CBC) : Colors.black38,
-                )),
+              onPressed: () {
+                setState(() {
+                  isRepeat = !isRepeat;
+                });
+                if (isRepeat == true) {
+                  audioPLayer.setReleaseMode(ReleaseMode.loop);
+                } else {
+                  audioPLayer.setReleaseMode(ReleaseMode.stop);
+                }
+              },
+              icon: Icon(
+                Icons.repeat,
+                color: isRepeat ? const Color(0xff672CBC) : Colors.black38,
+              ),
+            ),
           ],
         ),
       ),
