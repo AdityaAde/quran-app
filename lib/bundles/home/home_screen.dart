@@ -52,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Scaffold _listSurah(BuildContext context, TextTheme textTheme, ColorScheme colorScheme, ListSurahLoaded state) {
     return Scaffold(
-      floatingActionButton: const FloatingButton(),
       appBar: AppBarCustom.appBarCustom(
         context,
         'Quran App',
@@ -85,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: const CustomNavbar(),
     );
   }
 }

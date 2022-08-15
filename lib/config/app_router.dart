@@ -8,13 +8,15 @@ class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return SplashScreen.route();
+        return LoadingScreen.route();
       case '/home':
         return HomeScreen.route();
       case '/detail-surah':
         return DetailSurahScreen.route(arguments: settings.arguments as Tuple2<BuildContext, SurahModels>);
       case '/bookmarks':
         return BookmarkScreen.route();
+      case '/pray':
+        return PrayScreen.route();
       default:
         return _errorRoute();
     }

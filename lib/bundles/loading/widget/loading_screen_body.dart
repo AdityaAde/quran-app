@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/bloc.dart';
 
-class SplashScreenBody extends StatelessWidget {
-  const SplashScreenBody({Key? key}) : super(key: key);
+class LoadingScreenBody extends StatelessWidget {
+  const LoadingScreenBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
