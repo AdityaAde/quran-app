@@ -22,23 +22,23 @@ class DetailSurahBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: surah.ayat!.length,
-        itemBuilder: (context, index) {
-          final surahDetail = surah.ayat![index];
-          final indexSurah = index + 1;
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: surah.ayat!.length,
+      itemBuilder: (context, index) {
+        final surahDetail = surah.ayat![index];
+        final indexSurah = index + 1;
 
-          return Column(
-            children: [
-              _headerSurah(indexSurah, context, surahDetail),
-              const SizedBox(height: 15),
-              _bodySurah(surahDetail),
-              const SizedBox(height: 30),
-            ],
-          );
-        },
-      ),
+        return Column(
+          children: [
+            _headerSurah(indexSurah, context, surahDetail),
+            const SizedBox(height: 15),
+            _bodySurah(surahDetail),
+            const SizedBox(height: 30),
+          ],
+        );
+      },
     );
   }
 

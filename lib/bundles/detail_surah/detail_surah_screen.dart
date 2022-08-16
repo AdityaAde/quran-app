@@ -36,7 +36,9 @@ class DetailSurahScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is DetailSurahLoading) {
               return const Scaffold(
-                body: Loading(),
+                body: Center(
+                  child: Loading(),
+                ),
               );
             } else if (state is DetailSurahLoaded) {
               return _surahLoaded(context, textTheme, colorScheme, descriptionSurah, state);
@@ -64,7 +66,7 @@ class DetailSurahScreen extends StatelessWidget {
         colorScheme,
         InfoSurah(textTheme: textTheme, descriptionSurah: descriptionSurah, colorScheme: colorScheme),
       ),
-      body: Column(
+      body: ListView(
         children: [
           const SizedBox(height: 15),
           HeaderTitleSurah(

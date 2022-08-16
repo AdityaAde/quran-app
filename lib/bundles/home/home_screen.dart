@@ -69,24 +69,31 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            HeaderHome(
-              textTheme: textTheme,
-              colorScheme: colorScheme,
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              children: [
+                HeaderHome(
+                  textTheme: textTheme,
+                  colorScheme: colorScheme,
+                ),
+                const SizedBox(height: 15),
+                ListSurah(
+                  listSurah: state.listSurah,
+                  textTheme: textTheme,
+                  colorScheme: colorScheme,
+                ),
+              ],
             ),
-            const SizedBox(height: 15),
-            ListSurah(
-              listSurah: state.listSurah,
-              textTheme: textTheme,
-              colorScheme: colorScheme,
-            ),
-          ],
-        ),
+          ),
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: CustomNavbar(),
+          ),
+        ],
       ),
-      bottomNavigationBar: const CustomNavbar(),
     );
   }
 }
