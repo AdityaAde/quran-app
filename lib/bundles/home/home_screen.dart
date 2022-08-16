@@ -38,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, state) {
           if (state is ListSurahLoading) {
             return const Scaffold(
-              body: Loading(),
+              body: Center(
+                child: Loading(),
+              ),
             );
           } else if (state is ListSurahLoaded) {
             return _listSurah(context, textTheme, colorScheme, state);

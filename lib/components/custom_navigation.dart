@@ -22,6 +22,7 @@ class CustomNavbar extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, '/pray');
+                  context.read<DoaBloc>().add(GetListDoa());
                 },
                 child: Image.asset('assets/images/pray.png'),
               ),

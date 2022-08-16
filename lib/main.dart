@@ -33,8 +33,11 @@ class MyApp extends StatelessWidget {
         BlocProvider<BookmarkBloc>(
           create: (context) => BookmarkBloc(),
         ),
-        BlocProvider(
+        BlocProvider<LastReadBloc>(
           create: (context) => LastReadBloc(),
+        ),
+        BlocProvider<DoaBloc>(
+          create: (context) => DoaBloc(),
         ),
       ],
       child: MaterialApp(
