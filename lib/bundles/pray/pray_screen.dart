@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/bloc.dart';
 import '../../components/components.dart';
+import 'widget/list_doa.dart';
 
 class PrayScreen extends StatelessWidget {
   const PrayScreen({Key? key}) : super(key: key);
@@ -25,7 +26,17 @@ class PrayScreen extends StatelessWidget {
         'Doa - Doa',
         textTheme,
         colorScheme,
-        const SizedBox(),
+        IconButton(
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Not Implemented Yet')),
+            );
+          },
+          icon: Icon(
+            Icons.search,
+            color: colorScheme.onBackground.withOpacity(0.5),
+          ),
+        ),
       ),
       body: BlocConsumer<DoaBloc, DoaState>(
         listener: (context, state) {
@@ -41,32 +52,10 @@ class PrayScreen extends StatelessWidget {
                   child: Loading(),
                 );
               } else if (state is DoaLoaded) {
-                return ListView.builder(
-                  itemCount: state.listDoa.data!.length,
-                  itemBuilder: (context, index) {
-                    final doa = state.listDoa.data![index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text(
-                              doa.nama!,
-                              style: textTheme.bodyLarge!.copyWith(
-                                fontSize: 14,
-                                color: colorScheme.onBackground.withOpacity(0.7),
-                              ),
-                            ),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 18,
-                            ),
-                          ),
-                          const Divider(thickness: 1),
-                        ],
-                      ),
-                    );
-                  },
+                return ListDoa(
+                  textTheme: textTheme,
+                  colorScheme: colorScheme,
+                  state: state,
                 );
               } else {
                 return const Center(

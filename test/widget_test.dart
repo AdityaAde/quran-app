@@ -16,11 +16,8 @@ void main() async {
   DetailSurahRepository detailSurahRepository = DetailSurahRepository();
   await detailSurahRepository.getDetailSurah('114');
 
-  http.Response listDoa = await getDoa();
-  print(listDoa.statusCode);
-
-  http.Response detailDoa = await getDetailDoa(1);
-  print(detailDoa.statusCode);
+  await getDoa();
+  await getDetailDoa(1);
 }
 
 Future<http.Response> getDoa() async {
