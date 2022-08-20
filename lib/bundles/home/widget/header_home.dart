@@ -113,7 +113,7 @@ class HeaderHome extends StatelessWidget {
         )),
         Divider(
           thickness: 3,
-          color: colorScheme.primary,
+          color: colorScheme.secondary,
         ),
       ],
     );

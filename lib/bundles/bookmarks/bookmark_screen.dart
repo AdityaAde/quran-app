@@ -75,12 +75,12 @@ class BookmarkScreen extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   child: Text(
                     "${index + 1}",
-                    style: textTheme.bodyLarge!.copyWith(color: Colors.black),
+                    style: textTheme.bodyLarge!,
                   )),
               title: Text(data['surah'].toString().replaceAll("+", "'")),
               subtitle: Text(
                 "Ayat ${data['ayat']}",
-                style: textTheme.bodyLarge!.copyWith(color: Colors.black.withOpacity(0.6)),
+                style: textTheme.bodyLarge!.copyWith(color: colorScheme.onBackground.withOpacity(0.6)),
               ),
               trailing: IconButton(
                 onPressed: () {

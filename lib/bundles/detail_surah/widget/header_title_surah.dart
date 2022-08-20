@@ -37,13 +37,13 @@ class HeaderTitleSurah extends StatelessWidget {
               children: [
                 Text(
                   arguments!.item2.namaLatin!,
-                  style: textTheme.headline3!.copyWith(color: colorScheme.background),
+                  style: textTheme.headline3!.copyWith(color: colorScheme.onPrimary),
                 ),
                 const SizedBox(height: 3),
                 Text(
                   arguments!.item2.arti!,
                   style: textTheme.headline3!.copyWith(
-                    color: colorScheme.background,
+                    color: colorScheme.onPrimary,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -52,13 +52,13 @@ class HeaderTitleSurah extends StatelessWidget {
                   width: 250,
                   child: Divider(
                     thickness: 1,
-                    color: colorScheme.background.withOpacity(0.7),
+                    color: colorScheme.onPrimary.withOpacity(0.7),
                   ),
                 ),
                 const SizedBox(height: 3),
                 Text(
                   '${arguments!.item2.jumlahAyat!.toString()} AYAT',
-                  style: textTheme.headline4!.copyWith(color: colorScheme.background),
+                  style: textTheme.headline4!.copyWith(color: colorScheme.onPrimary),
                 )
               ],
             ),

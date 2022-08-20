@@ -9,7 +9,7 @@ class CustomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    var isChangeTheme = false;
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Container(
@@ -21,7 +21,18 @@ class CustomNavbar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.asset('assets/images/quran.png'),
+            InkWell(
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Not Implemented Yet',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  );
+                },
+                child: Image.asset('assets/images/quran.png')),
             InkWell(
               onTap: () {
                 Navigator.pushNamed(context, '/pray');
@@ -36,69 +47,30 @@ class CustomNavbar extends StatelessWidget {
               },
               child: Image.asset('assets/images/bookmark.png'),
             ),
-            IconButton(
-                onPressed: () => bottomSheet(context, textTheme),
-                icon: const Icon(
-                  Icons.wb_sunny_outlined,
-                  color: Colors.white,
-                )),
+            InkWell(
+              onTap: () {
+                isChangeTheme = !isChangeTheme;
+                context.read<ThemeCubit>().switchTheme(isChangeTheme);
+              },
+              child: BlocBuilder<ThemeCubit, ThemeState>(
+                builder: (context, state) {
+                  if (state.theme == AppTheme.light) {
+                    return const Icon(
+                      Icons.light_mode_outlined,
+                      color: Colors.white,
+                    );
+                  } else {
+                    return const Icon(
+                      Icons.dark_mode_outlined,
+                      color: Colors.white,
+                    );
+                  }
+                },
+              ),
+            )
           ],
         ),
       ),
     );
-  }
-
-  void bottomSheet(BuildContext context, TextTheme textTheme) {
-    var isChangeTheme = false;
-    showModalBottomSheet(
-        context: context,
-        builder: (builder) {
-          return Container(
-            color: Colors.transparent,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
-              child: ListTile(
-                title: Text(
-                  'Kamu yakin ingin mengubah tema?',
-                  style: textTheme.headline4!.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                subtitle: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(fixedSize: const Size(50, 30)),
-                      onPressed: () {
-                        isChangeTheme = !isChangeTheme;
-                        context.read<ThemeCubit>().switchTheme(isChangeTheme);
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        'Ya',
-                        style: textTheme.bodyLarge!.copyWith(color: Colors.white),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(fixedSize: const Size(50, 30)),
-                      onPressed: () {
-                        isChangeTheme = false;
-                        context.read<ThemeCubit>().switchTheme(isChangeTheme);
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        'Tidak',
-                        style: textTheme.bodyLarge!.copyWith(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
   }
 }

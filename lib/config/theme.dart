@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme() {
   return ThemeData(
+    appBarTheme: const AppBarTheme(
+        iconTheme: IconThemeData(
+      color: Color(0xff672CBC),
+    )),
     scaffoldBackgroundColor: Colors.white,
     fontFamily: 'Poppins',
     textTheme: _textLightTheme(),
@@ -58,14 +62,14 @@ TextTheme _textLightTheme() {
 ColorScheme _colorSchemeLightTheme() {
   return const ColorScheme(
     primary: Color(0xff672CBC),
-    secondary: Color(0xff0f821a),
+    secondary: Color(0xff672CBC),
     primaryContainer: Color(0xffF9B091),
     secondaryContainer: Color.fromARGB(255, 67, 66, 66),
     tertiaryContainer: Color(0x89f6ea63),
     onTertiaryContainer: Color(0xff854503),
     background: Color(0xf2f8f8f8),
     surface: Colors.red,
-    onPrimary: Color(0xff672CBC),
+    onPrimary: Colors.white,
     onSecondary: Colors.white,
     brightness: Brightness.light,
     onBackground: Colors.black,
@@ -77,6 +81,7 @@ ColorScheme _colorSchemeLightTheme() {
 
 ThemeData darkTheme() {
   return ThemeData(
+    appBarTheme: const AppBarTheme(iconTheme: IconThemeData(color: Colors.white)),
     scaffoldBackgroundColor: Colors.black,
     fontFamily: 'Poppins',
     textTheme: _textdarkTheme(),
@@ -87,43 +92,43 @@ ThemeData darkTheme() {
 TextTheme _textdarkTheme() {
   return const TextTheme(
     headline1: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.bold,
       fontSize: 36,
     ),
     headline2: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.bold,
       fontSize: 22,
     ),
     headline3: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.bold,
       fontSize: 18,
     ),
     headline4: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.bold,
       fontSize: 16,
     ),
     headline5: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.bold,
       fontSize: 14,
     ),
     headline6: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.normal,
       fontSize: 14,
     ),
     bodyText1: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.normal,
       height: 1.75,
       fontSize: 12,
     ),
     bodyText2: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.normal,
       fontSize: 10,
     ),
@@ -132,18 +137,18 @@ TextTheme _textdarkTheme() {
 
 ColorScheme _colorSchemedarkTheme() {
   return const ColorScheme(
-    primary: Color(0xff672CBC),
-    secondary: Color(0xff0f821a),
+    primary: Colors.white,
+    secondary: Color(0xff672CBC),
     primaryContainer: Color(0xffF9B091),
     secondaryContainer: Color.fromARGB(255, 67, 66, 66),
     tertiaryContainer: Color(0x89f6ea63),
     onTertiaryContainer: Color(0xff854503),
-    background: Color(0xf2f8f8f8),
+    background: Colors.black,
     surface: Colors.red,
-    onPrimary: Color(0xff672CBC),
+    onPrimary: Colors.white,
     onSecondary: Colors.white,
     brightness: Brightness.dark,
-    onBackground: Colors.black,
+    onBackground: Colors.white,
     error: Colors.red,
     onError: Colors.red,
     onSurface: Colors.purple,

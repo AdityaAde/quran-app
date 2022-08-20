@@ -36,7 +36,7 @@ class SurahTile extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 child: Text(
                   surahIndex.toString(),
-                  style: textTheme.bodyLarge!.copyWith(color: Colors.black),
+                  style: textTheme.bodyText2,
                 ),
               ),
               const SizedBox(width: 15),

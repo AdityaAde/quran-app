@@ -27,7 +27,7 @@ class ListDoa extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Divider(
             thickness: 3,
-            color: colorScheme.primary,
+            color: colorScheme.secondary,
           ),
         ),
         const SizedBox(height: 8),

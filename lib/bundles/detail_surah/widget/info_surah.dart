@@ -48,7 +48,7 @@ class InfoSurah extends StatelessWidget {
       },
       icon: Icon(
         Icons.info_outline,
-        color: colorScheme.onPrimary,
+        color: colorScheme.primary,
       ),
     );
   }
