@@ -44,7 +44,11 @@ class ListDoa extends StatelessWidget {
                   ListTile(
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Not Implemented Yet')),
+                        const SnackBar(
+                            content: Text(
+                          'Not Implemented Yet',
+                          style: TextStyle(color: Colors.white),
+                        )),
                       );
                     },
                     title: Text(

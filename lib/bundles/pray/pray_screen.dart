@@ -29,7 +29,11 @@ class PrayScreen extends StatelessWidget {
         IconButton(
           onPressed: () {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Not Implemented Yet')),
+              const SnackBar(
+                  content: Text(
+                'Not Implemented Yet',
+                style: TextStyle(color: Colors.white),
+              )),
             );
           },
           icon: Icon(

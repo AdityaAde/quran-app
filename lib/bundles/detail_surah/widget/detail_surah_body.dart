@@ -91,7 +91,10 @@ class DetailSurahBody extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
                                             ElevatedButton(
-                                              style: ElevatedButton.styleFrom(fixedSize: const Size(100, 30)),
+                                              style: ElevatedButton.styleFrom(
+                                                fixedSize: const Size(100, 30),
+                                                primary: colorScheme.secondary,
+                                              ),
                                               onPressed: () async {
                                                 Navigator.pop(context);
                                                 context.read<BookmarkBloc>().add(AddBookmarkEvent(
@@ -109,12 +112,15 @@ class DetailSurahBody extends StatelessWidget {
                                               child: Text(
                                                 'Last Read',
                                                 style: textTheme.bodyLarge!.copyWith(
-                                                  color: Colors.white,
+                                                  color: colorScheme.onPrimary,
                                                 ),
                                               ),
                                             ),
                                             ElevatedButton(
-                                              style: ElevatedButton.styleFrom(fixedSize: const Size(100, 30)),
+                                              style: ElevatedButton.styleFrom(
+                                                fixedSize: const Size(100, 30),
+                                                primary: colorScheme.secondary,
+                                              ),
                                               onPressed: () {
                                                 Navigator.pop(context);
                                                 context.read<BookmarkBloc>().add(AddBookmarkEvent(
@@ -132,7 +138,7 @@ class DetailSurahBody extends StatelessWidget {
                                               child: Text(
                                                 'Bookmark',
                                                 style: textTheme.bodyLarge!.copyWith(
-                                                  color: Colors.white,
+                                                  color: colorScheme.onPrimary,
                                                 ),
                                               ),
                                             ),

@@ -17,7 +17,7 @@ class CustomNavbar extends StatelessWidget {
           color: Color.fromARGB(255, 149, 96, 223),
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
-        height: 60,
+        height: 45,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -58,11 +58,13 @@ class CustomNavbar extends StatelessWidget {
                     return const Icon(
                       Icons.light_mode_outlined,
                       color: Colors.white,
+                      size: 30,
                     );
                   } else {
                     return const Icon(
                       Icons.dark_mode_outlined,
                       color: Colors.white,
+                      size: 30,
                     );
                   }
                 },
