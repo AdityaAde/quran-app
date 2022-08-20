@@ -7,6 +7,7 @@ import 'package:quran_app/theme_observer.dart';
 import 'config/config.dart';
 
 import 'bloc/bloc.dart';
+import 'config/theme/theme_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,14 +37,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<DoaBloc>(create: (context) => DoaBloc()),
       ],
       child: BlocConsumer<ThemeCubit, ThemeState>(
-        listener: (context, state) {
-          debugPrint('THEME HAS CHANGED TO ${state.enumToString()}');
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Quran App',
-            theme: state.theme == AppTheme.light ? lightTheme() : darkTheme(),
+            theme: state.theme == 'light' ? lightTheme() : darkTheme(),
             onGenerateRoute: AppRouter.onGenerateRoute,
             initialRoute: '/',
           );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/config/config.dart';
 
 import '../bloc/bloc.dart';
+import '../config/theme/theme_cubit.dart';
 
 class CustomNavbar extends StatelessWidget {
   const CustomNavbar({Key? key}) : super(key: key);
@@ -54,7 +54,7 @@ class CustomNavbar extends StatelessWidget {
               },
               child: BlocBuilder<ThemeCubit, ThemeState>(
                 builder: (context, state) {
-                  if (state.theme == AppTheme.light) {
+                  if (state.theme == 'light') {
                     return const Icon(
                       Icons.light_mode_outlined,
                       color: Colors.white,

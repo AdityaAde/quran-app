@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/config/theme/theme_cubit.dart';
 
 import '../../../bloc/bloc.dart';
 
-class LoadingScreenBody extends StatelessWidget {
+class LoadingScreenBody extends StatefulWidget {
   const LoadingScreenBody({Key? key}) : super(key: key);
+
+  @override
+  State<LoadingScreenBody> createState() => _LoadingScreenBodyState();
+}
+
+class _LoadingScreenBodyState extends State<LoadingScreenBody> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ThemeCubit>().getCurrentTheme();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +75,7 @@ class LoadingScreenBody extends StatelessWidget {
           child: Center(
             child: Text(
               'Get Started',
-              style: textTheme.headline4!.copyWith(color: colorScheme.background),
+              style: textTheme.headline4!.copyWith(color: colorScheme.onPrimary),
             ),
           ),
         ),

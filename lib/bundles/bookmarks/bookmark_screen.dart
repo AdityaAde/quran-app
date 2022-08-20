@@ -86,7 +86,11 @@ class BookmarkScreen extends StatelessWidget {
                 onPressed: () {
                   context.read<BookmarkBloc>().add(DeleteBookmarkEvent(id: data['id']));
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Berhasil hapus bookmark')),
+                    const SnackBar(
+                        content: Text(
+                      'Berhasil hapus bookmark',
+                      style: TextStyle(color: Colors.white),
+                    )),
                   );
                 },
                 icon: const Icon(Icons.delete),
