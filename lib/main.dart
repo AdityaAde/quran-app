@@ -21,31 +21,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ListSurahBloc>(
-          create: (context) => ListSurahBloc(),
-        ),
-        BlocProvider<DetailSurahBloc>(
-          create: (context) => DetailSurahBloc(),
-        ),
-        BlocProvider<AudioSurahBloc>(
-          create: (context) => AudioSurahBloc(),
-        ),
-        BlocProvider<BookmarkBloc>(
-          create: (context) => BookmarkBloc(),
-        ),
-        BlocProvider<LastReadBloc>(
-          create: (context) => LastReadBloc(),
-        ),
-        BlocProvider<DoaBloc>(
-          create: (context) => DoaBloc(),
-        ),
+        BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
+        BlocProvider<ListSurahBloc>(create: (context) => ListSurahBloc()),
+        BlocProvider<DetailSurahBloc>(create: (context) => DetailSurahBloc()),
+        BlocProvider<AudioSurahBloc>(create: (context) => AudioSurahBloc()),
+        BlocProvider<BookmarkBloc>(create: (context) => BookmarkBloc()),
+        BlocProvider<LastReadBloc>(create: (context) => LastReadBloc()),
+        BlocProvider<DoaBloc>(create: (context) => DoaBloc()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Quran App',
-        theme: theme(),
-        onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: '/',
+      child: BlocConsumer<ThemeCubit, ThemeState>(
+        listener: (context, state) {
+          debugPrint(state.toString());
+        },
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Quran App',
+            theme: state.theme == AppTheme.light ? lightTheme() : darkTheme(),
+            onGenerateRoute: AppRouter.onGenerateRoute,
+            initialRoute: '/',
+          );
+        },
       ),
     );
   }
