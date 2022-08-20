@@ -21,7 +21,7 @@ class ThemeCubit extends Cubit<ThemeState> {
   void getCurrentTheme() async {
     var currentTheme = await themeRepository.getTheme();
     emit(state.copyWith(
-      theme: currentTheme.last['theme_current'],
+      theme: currentTheme.isEmpty ? 'light' : currentTheme.last['theme_current'],
     ));
   }
 }
