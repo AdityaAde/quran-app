@@ -1,6 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/theme_observer.dart';
 import 'config/config.dart';
 
 import 'bloc/bloc.dart';
@@ -11,7 +14,10 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(const MyApp());
+  BlocOverrides.runZoned(
+    () => runApp(const MyApp()),
+    blocObserver: ThemeObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -31,7 +37,7 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocConsumer<ThemeCubit, ThemeState>(
         listener: (context, state) {
-          debugPrint(state.toString());
+          debugPrint('THEME HAS CHANGED TO ${state.enumToString()}');
         },
         builder: (context, state) {
           return MaterialApp(

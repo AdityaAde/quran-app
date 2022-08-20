@@ -7,8 +7,8 @@ class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit() : super(ThemeState.initial());
 
   void switchTheme(bool isChanged) {
-    state.copyWith(
+    emit(state.copyWith(
       theme: isChanged ? AppTheme.dark : AppTheme.light,
-    );
+    ));
   }
 }

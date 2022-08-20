@@ -17,4 +17,5 @@ class ThemeState extends Equatable {
 
   @override
   String toString() => 'ThemeState(theme: $theme)';
+  String enumToString() => theme.toString().split('.').last.split(')').first.toUpperCase();
 }
