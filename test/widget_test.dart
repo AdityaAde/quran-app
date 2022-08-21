@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:quran_app/provider/surah/surah_repository.dart';
-import 'package:quran_app/provider/detail_surah/detail_surah_repository.dart';
+import 'package:quran_app/provider/provider.dart';
 
 void main() async {
   SurahRepository surahRepository = SurahRepository();
@@ -8,6 +7,9 @@ void main() async {
 
   DetailSurahRepository detailSurahRepository = DetailSurahRepository();
   await detailSurahRepository.getDetailSurah('114');
+
+  DetailDoaRepository detailDoaRepository = DetailDoaRepository();
+  await detailDoaRepository.getDetailDoa('1');
 
   await getDoa();
   await getDetailDoa(1);
