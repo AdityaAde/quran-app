@@ -15,13 +15,13 @@ class ThemeCubit extends Cubit<ThemeState> {
         theme: isChanged ? currentTheme = 'dark' : currentTheme = 'light',
       ),
     );
-    await themeRepository.addTheme(currentTheme);
+    await themeRepository.addTheme(currentTheme, true);
   }
 
   void getCurrentTheme() async {
     var currentTheme = await themeRepository.getTheme();
     emit(state.copyWith(
-      theme: currentTheme.isEmpty ? 'light' : currentTheme.last['theme_current'],
+      theme: currentTheme!.isEmpty ? 'light' : currentTheme['theme_current'],
     ));
   }
 }

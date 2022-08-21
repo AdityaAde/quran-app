@@ -29,8 +29,8 @@ class DatabaseThemeManager {
       onCreate: (database, version) async {
         return await database.execute('''
         CREATE TABLE theme (
-          id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-          theme_current TEXT NOT NULL
+          theme_current TEXT NOT NULL,
+          theme_flag INTEGER DEFAULT 0
         )
         ''');
       },
@@ -44,6 +44,6 @@ class DatabaseThemeManager {
 }
 
 abstract class BaseThemeRepository {
-  Future<void> addTheme(String theme);
-  Future<List<Map<String, dynamic>>> getTheme();
+  Future<void> addTheme(String theme, bool themeFlag);
+  Future<Map<String, dynamic>?> getTheme();
 }

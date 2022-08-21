@@ -35,8 +35,8 @@ class BookmarkRepository extends BaseBookmarkRepository {
         "last_read": lastRead == true ? 1 : 0,
       });
     }
-    /* var data = await db.query("bookmark");
-    print(data) */
+    /*  var data = await db.query("bookmark");
+    print(data); */
   }
 
   @override
@@ -55,10 +55,7 @@ class BookmarkRepository extends BaseBookmarkRepository {
   @override
   Future<Map<String, dynamic>?> getLastRead() async {
     Database db = await database.db;
-    final List<Map<String, dynamic>> dataLastRead = await db.query(
-      "bookmark",
-      where: "last_read = 1",
-    );
+    final List<Map<String, dynamic>> dataLastRead = await db.query("bookmark", where: "last_read = 1");
     if (dataLastRead.isEmpty) {
       // Tidak ada data lastread
       return null;

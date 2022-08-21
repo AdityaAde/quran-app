@@ -4,23 +4,33 @@ import 'package:sqflite/sqflite.dart';
 class ThemeRepository extends BaseThemeRepository {
   DatabaseThemeManager database = DatabaseThemeManager.instance;
   @override
-
-  ///TODO: BUG pada bagian ganti tema => data string berbentuk LIST yang menumpuk mengakibatkan aplikasi bengkak
-  Future<void> addTheme(String theme) async {
+  Future<void> addTheme(String theme, bool themeFlag) async {
     Database db = await database.db;
+
+    if (themeFlag == true) {
+      await db.delete("theme", where: "theme_flag = 1");
+    }
+
     await db.insert("theme", {
       "theme_current": theme,
+      "theme_flag": themeFlag == true ? 1 : 0,
     });
 
-    var data = await db.query("theme");
-    print(data);
+    /* var data = await db.query("theme");
+    print(data); */
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getTheme() async {
+  Future<Map<String, dynamic>?> getTheme() async {
     Database db = await database.db;
-    List<Map<String, dynamic>> theme = await db.query("theme");
-
-    return theme;
+    final List<Map<String, dynamic>> theme = await db.query("theme", where: "theme_flag = 1");
+    if (theme.isEmpty) {
+      return {
+        'theme_current': 'light',
+        'theme_flag': 1,
+      };
+    } else {
+      return theme.first;
+    }
   }
 }
