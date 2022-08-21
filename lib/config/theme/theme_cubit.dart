@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/provider/theme_save/theme_repository.dart';
+
+import '../../provider/provider.dart';
 
 part 'theme_state.dart';
 

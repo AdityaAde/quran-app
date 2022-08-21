@@ -64,7 +64,7 @@ ColorScheme _colorSchemeLightTheme() {
     primary: Color(0xff672CBC),
     secondary: Color(0xff672CBC),
     primaryContainer: Color(0xffF9B091),
-    secondaryContainer: Color.fromARGB(255, 67, 66, 66),
+    secondaryContainer: Colors.purpleAccent,
     tertiaryContainer: Color(0x89f6ea63),
     onTertiaryContainer: Color(0xff854503),
     background: Color(0xf2f8f8f8),
@@ -82,7 +82,7 @@ ColorScheme _colorSchemeLightTheme() {
 ThemeData darkTheme() {
   return ThemeData(
     appBarTheme: const AppBarTheme(iconTheme: IconThemeData(color: Colors.white)),
-    scaffoldBackgroundColor: Colors.black,
+    scaffoldBackgroundColor: const Color(0xFF091945),
     fontFamily: 'Poppins',
     textTheme: _textdarkTheme(),
     colorScheme: _colorSchemedarkTheme(),
@@ -140,17 +140,17 @@ ColorScheme _colorSchemedarkTheme() {
     primary: Colors.white,
     secondary: Color(0xff672CBC),
     primaryContainer: Color(0xffF9B091),
-    secondaryContainer: Color.fromARGB(255, 67, 66, 66),
+    secondaryContainer: Colors.purpleAccent,
     tertiaryContainer: Color(0x89f6ea63),
     onTertiaryContainer: Color(0xff854503),
     background: Colors.black,
-    surface: Colors.red,
+    surface: Color(0xFF091945),
     onPrimary: Colors.white,
     onSecondary: Colors.black,
     brightness: Brightness.dark,
     onBackground: Colors.white,
     error: Colors.red,
     onError: Colors.red,
-    onSurface: Colors.purple,
+    onSurface: Colors.white,
   );
 }

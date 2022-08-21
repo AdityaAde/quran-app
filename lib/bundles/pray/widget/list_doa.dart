@@ -43,13 +43,7 @@ class ListDoa extends StatelessWidget {
                 children: [
                   ListTile(
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text(
-                          'Not Implemented Yet',
-                          style: TextStyle(color: Colors.white),
-                        )),
-                      );
+                      Navigator.pushNamed(context, '/detail-doa');
                     },
                     title: Text(
                       doa.nama!,

@@ -75,7 +75,7 @@ class _LoadingScreenBodyState extends State<LoadingScreenBody> {
           child: Center(
             child: Text(
               'Get Started',
-              style: textTheme.headline4!.copyWith(color: colorScheme.onPrimary),
+              style: textTheme.headline4!.copyWith(color: colorScheme.background),
             ),
           ),
         ),

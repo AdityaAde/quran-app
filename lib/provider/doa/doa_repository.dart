@@ -1,8 +1,8 @@
 import 'dart:convert';
-
-import 'package:quran_app/models/doa_models.dart';
-import 'package:quran_app/provider/doa/base_doa_repository.dart';
 import 'package:http/http.dart' as http;
+
+import '../../models/models.dart';
+import 'base_doa_repository.dart';
 
 class DoaRepository extends BaseDoaRepository {
   @override

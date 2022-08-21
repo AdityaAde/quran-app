@@ -1,5 +1,5 @@
-import 'package:quran_app/provider/theme_save/base_theme_repository.dart';
 import 'package:sqflite/sqflite.dart';
+import '../provider.dart';
 
 class ThemeRepository extends BaseThemeRepository {
   DatabaseThemeManager database = DatabaseThemeManager.instance;

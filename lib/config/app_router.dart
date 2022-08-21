@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/models/surah_models.dart';
 import 'package:tuple/tuple.dart';
 
 import '../bundles/bundles.dart';
+import '../models/models.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
@@ -17,6 +17,8 @@ class AppRouter {
         return BookmarkScreen.route();
       case '/pray':
         return PrayScreen.route();
+      case '/detail-doa':
+        return DetailPrayScreen.route();
       default:
         return _errorRoute();
     }
