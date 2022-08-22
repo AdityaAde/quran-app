@@ -32,7 +32,6 @@ class PrayScreen extends StatelessWidget {
               const SnackBar(
                   content: Text(
                 'Not Implemented Yet',
-                style: TextStyle(color: Colors.white),
               )),
             );
           },

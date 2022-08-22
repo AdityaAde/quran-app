@@ -20,7 +20,6 @@ class DetailSurahBloc extends Bloc<DetailSurahEvent, DetailSurahState> {
     emit(DetailSurahLoading());
     try {
       final surahDetailArabic = await detailSurahRepository.getDetailSurah(event.surahIndex);
-
       emit(DetailSurahLoaded(surahDetailArabic: surahDetailArabic));
     } catch (e) {
       return emit(DetailSurahError(error: e.toString()));

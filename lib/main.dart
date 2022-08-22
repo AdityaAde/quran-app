@@ -35,9 +35,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<BookmarkBloc>(create: (context) => BookmarkBloc()),
         BlocProvider<LastReadBloc>(create: (context) => LastReadBloc()),
         BlocProvider<DoaBloc>(create: (context) => DoaBloc()),
+        BlocProvider<DetailDoaBloc>(create: (context) => DetailDoaBloc()),
       ],
-      child: BlocConsumer<ThemeCubit, ThemeState>(
-        listener: (context, state) {},
+      child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tuple/tuple.dart';
 
+import '../../bloc/bloc.dart';
 import '../../components/components.dart';
 
 class DetailPrayScreen extends StatelessWidget {
-  const DetailPrayScreen({Key? key}) : super(key: key);
+  const DetailPrayScreen({Key? key, this.arguments}) : super(key: key);
+
+  final Tuple2<BuildContext, String>? arguments;
 
   static const String routeName = '/detail-doa';
 
-  static Route route() {
+  static Route route({required Tuple2<BuildContext, String>? arguments}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => const DetailPrayScreen(),
+      builder: (context) => DetailPrayScreen(arguments: arguments),
     );
   }
 
@@ -21,43 +26,61 @@ class DetailPrayScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBarCustom.appBarCustom(
         context,
-        'Doa Sebelum Tidur',
+        arguments!.item2,
         textTheme,
         colorScheme,
         const SizedBox(),
       ),
-      body: ListView.builder(
-          itemCount: 1,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      'بِاسْمِكَ اللَّهُمَّ أَمُوْتُ وَأَحْيَا',
-                      style: textTheme.bodyLarge!.copyWith(fontSize: 20),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Bismika-llaahumma amuutu wa ahyaa.',
-                    style: textTheme.bodyLarge!.copyWith(color: colorScheme.secondaryContainer),
-                  ),
-                  Text(
-                    "Dengan Nama-Mu ya Allah, aku mati dan aku hidup.",
-                    style: textTheme.bodyLarge,
-                  ),
-                  Text(
-                    'HR. Bukhari 6324',
-                    style: textTheme.bodyLarge,
-                  )
-                ],
-              ),
-            );
-          }),
+      body: BlocBuilder<DetailDoaBloc, DetailDoaState>(
+        builder: (context, state) {
+          return BlocBuilder<DetailDoaBloc, DetailDoaState>(
+            builder: (context, state) {
+              if (state is DetailDoaLoading) {
+                return const Center(child: Loading());
+              } else if (state is DetailDoaLoaded) {
+                return ListView.builder(
+                    itemCount: state.detailDoa.data!.length,
+                    itemBuilder: (context, index) {
+                      final data = state.detailDoa.data![index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                data.lafal!,
+                                style: textTheme.bodyLarge!.copyWith(fontSize: 20),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              data.transliterasi!,
+                              style: textTheme.bodyLarge!.copyWith(color: colorScheme.secondaryContainer),
+                            ),
+                            Text(
+                              data.arti!,
+                              style: textTheme.bodyLarge,
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              data.riwayat!,
+                              style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w300),
+                            )
+                          ],
+                        ),
+                      );
+                    });
+              } else {
+                return const Center(
+                  child: Text('Terjadi masalah'),
+                );
+              }
+            },
+          );
+        },
+      ),
     );
   }
 }

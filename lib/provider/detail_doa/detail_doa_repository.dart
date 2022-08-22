@@ -12,7 +12,6 @@ class DetailDoaRepository extends BaseDetailDoaRepository {
     try {
       if (response.statusCode == 200) {
         final result = jsonDecode(response.body);
-        print(result);
         return DetailDoaModels.fromJson(result);
       } else {
         return throw Exception('Get detail doa error');

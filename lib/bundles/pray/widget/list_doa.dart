@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../bloc/list_doa/doa_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/bloc/bloc.dart';
+import 'package:tuple/tuple.dart';
 
 class ListDoa extends StatelessWidget {
   const ListDoa({
@@ -43,7 +45,9 @@ class ListDoa extends StatelessWidget {
                 children: [
                   ListTile(
                     onTap: () {
-                      Navigator.pushNamed(context, '/detail-doa');
+                      context.read<DetailDoaBloc>().add(GetDetailDoaEvent(id: doa.idDoa!));
+                      final Tuple2<BuildContext, String> arguments = Tuple2(context, doa.nama!);
+                      Navigator.pushNamed(context, '/detail-doa', arguments: arguments);
                     },
                     title: Text(
                       doa.nama!,

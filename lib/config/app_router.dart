@@ -18,7 +18,7 @@ class AppRouter {
       case '/pray':
         return PrayScreen.route();
       case '/detail-doa':
-        return DetailPrayScreen.route();
+        return DetailPrayScreen.route(arguments: settings.arguments as Tuple2<BuildContext, String>);
       default:
         return _errorRoute();
     }
