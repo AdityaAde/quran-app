@@ -28,12 +28,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
-        BlocProvider<ListSurahBloc>(create: (context) => ListSurahBloc()),
+        BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()..getCurrentTheme()),
+        BlocProvider<ListSurahBloc>(create: (context) => ListSurahBloc()..add(GetSurahEvent())),
+        BlocProvider<LastReadBloc>(create: (context) => LastReadBloc()..add(GetLastReadEvent())),
         BlocProvider<DetailSurahBloc>(create: (context) => DetailSurahBloc()),
         BlocProvider<AudioSurahBloc>(create: (context) => AudioSurahBloc()),
         BlocProvider<BookmarkBloc>(create: (context) => BookmarkBloc()),
-        BlocProvider<LastReadBloc>(create: (context) => LastReadBloc()),
         BlocProvider<DoaBloc>(create: (context) => DoaBloc()),
         BlocProvider<DetailDoaBloc>(create: (context) => DetailDoaBloc()),
       ],

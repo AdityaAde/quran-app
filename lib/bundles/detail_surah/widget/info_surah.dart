@@ -24,8 +24,11 @@ class InfoSurah extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50.0),
+                      topRight: Radius.circular(50.0),
+                    ),
+                  ),
                   child: ListTile(
                     title: Text(
                       'Penjelasan Surah',

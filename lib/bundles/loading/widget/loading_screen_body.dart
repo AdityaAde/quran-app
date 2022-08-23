@@ -1,22 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/config/theme/theme_cubit.dart';
 
-import '../../../bloc/bloc.dart';
-
-class LoadingScreenBody extends StatefulWidget {
+class LoadingScreenBody extends StatelessWidget {
   const LoadingScreenBody({Key? key}) : super(key: key);
-
-  @override
-  State<LoadingScreenBody> createState() => _LoadingScreenBodyState();
-}
-
-class _LoadingScreenBodyState extends State<LoadingScreenBody> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<ThemeCubit>().getCurrentTheme();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +65,6 @@ class _LoadingScreenBodyState extends State<LoadingScreenBody> {
           ),
         ),
         onTap: () {
-          context.read<ListSurahBloc>().add(GetSurahEvent());
-          context.read<LastReadBloc>().add(GetLastReadEvent());
           Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
         });
   }

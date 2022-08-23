@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../../bloc/bloc.dart';
+import '../../../components/route_transition.dart';
 import '../../../models/surah_models.dart';
+import '../../bundles.dart';
 import 'surah_tile.dart';
 
 class ListSurah extends StatelessWidget {
@@ -38,7 +40,7 @@ class ListSurah extends StatelessWidget {
                   onTap: () {
                     context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: surah.nomor.toString()));
                     final Tuple2<BuildContext, SurahModels> arguments = Tuple2(context, surah);
-                    Navigator.pushNamed(context, '/detail-surah', arguments: arguments);
+                    Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(arguments: arguments)));
                   },
                 ),
                 const SizedBox(height: 8),

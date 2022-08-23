@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../bloc/bloc.dart';
+import '../bundles/bundles.dart';
 import '../config/theme/theme_cubit.dart';
+import 'route_transition.dart';
 
 class CustomNavbar extends StatelessWidget {
   const CustomNavbar({Key? key}) : super(key: key);
@@ -25,25 +26,22 @@ class CustomNavbar extends StatelessWidget {
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text(
-                        'Not Implemented Yet',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      content: Text('Not Implemented Yet'),
                     ),
                   );
                 },
                 child: Image.asset('assets/images/quran.png')),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, '/pray');
+                Navigator.push(context, SlideTopRoute(page: const PrayScreen()));
                 context.read<DoaBloc>().add(GetListDoa());
               },
               child: Image.asset('assets/images/pray.png'),
             ),
             InkWell(
               onTap: () {
+                Navigator.push(context, SlideTopRoute(page: const BookmarkScreen()));
                 context.read<BookmarkBloc>().add(GetBookmarkEvent());
-                Navigator.pushNamed(context, '/bookmarks');
               },
               child: Image.asset('assets/images/bookmark.png'),
             ),

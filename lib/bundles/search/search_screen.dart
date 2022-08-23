@@ -3,11 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../bloc/bloc.dart';
+import '../../components/route_transition.dart';
 import '../../models/surah_models.dart';
+import '../bundles.dart';
 
 class SearchScreen extends SearchDelegate {
   List<SurahModels> listSurah;
   SearchScreen({required this.listSurah});
+
+  @override
+  String get searchFieldLabel => 'Cari Surah...';
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -75,7 +80,12 @@ class SearchScreen extends SearchDelegate {
     );
   }
 
-  Padding _searchTile(SurahModels suggestion, TextTheme textTheme, ColorScheme colorScheme, BuildContext context) {
+  Padding _searchTile(
+    SurahModels suggestion,
+    TextTheme textTheme,
+    ColorScheme colorScheme,
+    BuildContext context,
+  ) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -102,7 +112,7 @@ class SearchScreen extends SearchDelegate {
             query = suggestion.namaLatin!;
             context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: suggestion.nomor.toString()));
             final Tuple2<BuildContext, SurahModels> arguments = Tuple2(context, suggestion);
-            Navigator.pushNamed(context, '/detail-surah', arguments: arguments);
+            Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(arguments: arguments)));
           }),
     );
   }
