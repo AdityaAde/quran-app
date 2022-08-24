@@ -8,7 +8,7 @@ class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return LoadingScreen.route();
+        return WelcomeScreen.route();
       case '/home':
         return HomeScreen.route();
       case '/detail-surah':

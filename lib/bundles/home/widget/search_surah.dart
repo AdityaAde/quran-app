@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuple/tuple.dart';
 
-import '../../bloc/bloc.dart';
-import '../../components/route_transition.dart';
-import '../../models/surah_models.dart';
-import '../bundles.dart';
+import '../../../bloc/bloc.dart';
+import '../../../components/components.dart';
+import '../../../models/models.dart';
+import '../../bundles.dart';
 
-class SearchScreen extends SearchDelegate {
+class SearchSurah extends SearchDelegate {
   List<SurahModels> listSurah;
-  SearchScreen({required this.listSurah});
+  SearchSurah({required this.listSurah});
 
   @override
   String get searchFieldLabel => 'Cari Surah...';

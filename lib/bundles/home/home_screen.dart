@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/bloc.dart';
 import '../../components/components.dart';
-import '../bundles.dart';
+import 'widget/search_surah.dart';
 import 'widget/widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
         colorScheme,
         IconButton(
           onPressed: () {
-            showSearch(context: context, delegate: SearchScreen(listSurah: state.listSurah));
+            showSearch(context: context, delegate: SearchSurah(listSurah: state.listSurah));
           },
           icon: Icon(
             Icons.search,

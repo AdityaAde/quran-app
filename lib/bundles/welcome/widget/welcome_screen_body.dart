@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoadingScreenBody extends StatelessWidget {
-  const LoadingScreenBody({Key? key}) : super(key: key);
+import '../../../components/components.dart';
+import '../../bundles.dart';
+
+class WelcomeScreenBody extends StatelessWidget {
+  const WelcomeScreenBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +68,10 @@ class LoadingScreenBody extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () {
-          Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+        onTap: () async {
+          Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: const HomeScreen()), (route) => false);
+          final prefs = await SharedPreferences.getInstance();
+          prefs.setBool('onboarding', true);
         });
   }
 }

@@ -4,25 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/theme_observer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'config/config.dart';
-
 import 'bloc/bloc.dart';
-import 'config/theme/theme_cubit.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  final prefs = await SharedPreferences.getInstance();
+  final getValueOnBoarding = prefs.getBool('onboarding') ?? false;
   BlocOverrides.runZoned(
-    () => runApp(const MyApp()),
+    () => runApp(MyApp(valueOnBoard: getValueOnBoarding)),
     blocObserver: ThemeObserver(),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool valueOnBoard;
+  const MyApp({Key? key, required this.valueOnBoard}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class MyApp extends StatelessWidget {
             title: 'Quran App',
             theme: state.theme == 'light' ? lightTheme() : darkTheme(),
             onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: '/',
+            initialRoute: valueOnBoard ? '/home' : '/',
           );
         },
       ),

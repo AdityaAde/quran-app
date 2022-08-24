@@ -21,26 +21,6 @@ class PrayScreen extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBarCustom.appBarCustom(
-        context,
-        'Doa - Doa',
-        textTheme,
-        colorScheme,
-        IconButton(
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  content: Text(
-                'Not Implemented Yet',
-              )),
-            );
-          },
-          icon: Icon(
-            Icons.search,
-            color: colorScheme.onBackground.withOpacity(0.5),
-          ),
-        ),
-      ),
       body: BlocConsumer<DoaBloc, DoaState>(
         listener: (context, state) {
           if (state is DoaError) {
@@ -51,18 +31,23 @@ class PrayScreen extends StatelessWidget {
           return BlocBuilder<DoaBloc, DoaState>(
             builder: (context, state) {
               if (state is DoaLoading) {
-                return const Center(
-                  child: Loading(),
+                return const Scaffold(
+                  body: Center(
+                    child: Loading(),
+                  ),
                 );
               } else if (state is DoaLoaded) {
                 return ListDoa(
                   textTheme: textTheme,
                   colorScheme: colorScheme,
                   state: state,
+                  doa: state.listDoa,
                 );
               } else {
-                return const Center(
-                  child: Text('Terjadi Kesalahan!'),
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Terjadi Kesalahan!'),
+                  ),
                 );
               }
             },
