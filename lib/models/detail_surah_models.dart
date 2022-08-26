@@ -16,8 +16,6 @@ class SurahDetailModels {
     this.deskripsi,
     this.audio,
     this.ayat,
-    this.suratSelanjutnya,
-    this.suratSebelumnya,
   });
 
   bool? status;
@@ -44,8 +42,6 @@ class SurahDetailModels {
         deskripsi: json["deskripsi"],
         audio: json["audio"],
         ayat: List<Ayat>.from(json["ayat"].map((x) => Ayat.fromJson(x))),
-        suratSelanjutnya: SuratSelanjutnya.fromJson(json["surat_selanjutnya"]),
-        suratSebelumnya: json["surat_sebelumnya"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,8 +55,6 @@ class SurahDetailModels {
         "deskripsi": deskripsi,
         "audio": audio,
         "ayat": List<dynamic>.from(ayat!.map((x) => x.toJson())),
-        "surat_selanjutnya": suratSelanjutnya!.toJson(),
-        "surat_sebelumnya": suratSebelumnya,
       };
 }
 

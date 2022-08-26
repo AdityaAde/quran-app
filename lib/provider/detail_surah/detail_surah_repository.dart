@@ -7,7 +7,7 @@ import '../../models/models.dart';
 class DetailSurahRepository extends BaseDetailSurahRepository {
   @override
   Future<SurahDetailModels> getDetailSurah(surahIndex) async {
-    String url = 'https://equran.id/api/surat/1';
+    String url = 'https://equran.id/api/surat/$surahIndex';
     final response = await http.get(Uri.parse(url));
     try {
       if (response.statusCode == 200) {

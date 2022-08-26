@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuple/tuple.dart';
@@ -29,6 +30,9 @@ class DetailSurahScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is DetailSurahError) {
           context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: arguments!.item2.nomor.toString()));
+          if (kDebugMode) {
+            print(state.error);
+          }
         }
       },
       builder: (context, state) {
@@ -43,7 +47,11 @@ class DetailSurahScreen extends StatelessWidget {
             } else if (state is DetailSurahLoaded) {
               return _surahLoaded(context, textTheme, colorScheme, descriptionSurah, state);
             } else {
-              return const Center(child: Text('Something Went Wrong'));
+              return const Scaffold(
+                body: Center(
+                  child: Text('Something Went Wrong'),
+                ),
+              );
             }
           },
         );
