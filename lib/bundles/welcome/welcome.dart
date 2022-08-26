@@ -4,7 +4,7 @@ import 'widget/welcome_screen_body.dart';
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
-  static const String routeName = '/';
+  static const String routeName = '/welcome';
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),

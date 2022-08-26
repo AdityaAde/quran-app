@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/theme_observer.dart';
+import 'package:quran_app/bloc_observer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config/config.dart';
@@ -19,7 +19,7 @@ void main() async {
   final getValueOnBoarding = prefs.getBool('onboarding') ?? false;
   BlocOverrides.runZoned(
     () => runApp(MyApp(valueOnBoard: getValueOnBoarding)),
-    blocObserver: ThemeObserver(),
+    blocObserver: BlocBuilderObserver(),
   );
 }
 
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             title: 'Quran App',
             theme: state.theme == 'light' ? lightTheme() : darkTheme(),
             onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: valueOnBoard ? '/home' : '/',
+            initialRoute: valueOnBoard ? '/' : '/welcome',
           );
         },
       ),

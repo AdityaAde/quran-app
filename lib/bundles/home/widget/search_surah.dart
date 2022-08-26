@@ -111,8 +111,14 @@ class SearchSurah extends SearchDelegate {
           onTap: () {
             query = suggestion.namaLatin!;
             context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: suggestion.nomor.toString()));
-            final Tuple2<BuildContext, SurahModels> arguments = Tuple2(context, suggestion);
-            Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(arguments: arguments)));
+            final Tuple5<String, String, String, String, String> tuple = Tuple5(
+              suggestion.namaLatin!,
+              suggestion.jumlahAyat.toString(),
+              suggestion.arti!,
+              suggestion.deskripsi!,
+              suggestion.audio!,
+            );
+            Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(tuple: tuple)));
           }),
     );
   }

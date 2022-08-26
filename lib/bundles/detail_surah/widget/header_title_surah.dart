@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../../bloc/bloc.dart';
-import '../../../models/surah_models.dart';
 
 class HeaderTitleSurah extends StatelessWidget {
   const HeaderTitleSurah({
@@ -13,7 +12,7 @@ class HeaderTitleSurah extends StatelessWidget {
     required this.colorScheme,
   }) : super(key: key);
 
-  final Tuple2<BuildContext, SurahModels>? arguments;
+  final Tuple5<String, String, String, String, String>? arguments;
   final TextTheme textTheme;
   final ColorScheme colorScheme;
 
@@ -36,12 +35,12 @@ class HeaderTitleSurah extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  arguments!.item2.namaLatin!,
+                  arguments!.item1,
                   style: textTheme.headline3!.copyWith(color: colorScheme.onPrimary),
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  arguments!.item2.arti!,
+                  arguments!.item3,
                   style: textTheme.headline3!.copyWith(
                     color: colorScheme.onPrimary,
                     fontWeight: FontWeight.w400,
@@ -57,7 +56,7 @@ class HeaderTitleSurah extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  '${arguments!.item2.jumlahAyat!.toString()} AYAT',
+                  '${arguments!.item2.toString()} AYAT',
                   style: textTheme.headline4!.copyWith(color: colorScheme.onPrimary),
                 )
               ],
@@ -74,8 +73,8 @@ class HeaderTitleSurah extends StatelessWidget {
               isPlay = !isPlay;
               context.read<AudioSurahBloc>().add(
                     PlayAudioSurahEvent(
-                      urlSurahl: arguments!.item2.audio!,
-                      surahName: arguments!.item2.namaLatin!,
+                      urlSurahl: arguments!.item5,
+                      surahName: arguments!.item1,
                       isPlay: isPlay,
                     ),
                   );

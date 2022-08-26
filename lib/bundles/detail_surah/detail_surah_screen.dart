@@ -6,18 +6,17 @@ import 'package:tuple/tuple.dart';
 import 'widget/widget.dart';
 import '../../bloc/bloc.dart';
 import '../../components/components.dart';
-import '../../models/surah_models.dart';
 
 class DetailSurahScreen extends StatelessWidget {
-  const DetailSurahScreen({Key? key, this.arguments}) : super(key: key);
+  const DetailSurahScreen({Key? key, this.tuple}) : super(key: key);
 
-  final Tuple2<BuildContext, SurahModels>? arguments;
+  final Tuple5<String, String, String, String, String>? tuple;
 
   static const String routeName = '/detail-surah';
-  static Route route({required Tuple2<BuildContext, SurahModels>? arguments}) {
+  static Route route({required final Tuple5<String, String, String, String, String>? tuple}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => DetailSurahScreen(arguments: arguments),
+      builder: (_) => DetailSurahScreen(tuple: tuple!),
     );
   }
 
@@ -25,11 +24,11 @@ class DetailSurahScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final descriptionSurah = arguments!.item2.deskripsi!.replaceAll("</i>", " ");
+    final descriptionSurah = tuple!.item4.replaceAll("</i>", " ");
     return BlocConsumer<DetailSurahBloc, DetailSurahState>(
       listener: (context, state) {
         if (state is DetailSurahError) {
-          context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: arguments!.item2.nomor.toString()));
+          context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: tuple!.item2.toString()));
           if (kDebugMode) {
             print(state.error);
           }
@@ -69,7 +68,7 @@ class DetailSurahScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBarCustom.appBarCustom(
         context,
-        arguments!.item2.namaLatin!,
+        tuple!.item1,
         textTheme,
         colorScheme,
         InfoSurah(textTheme: textTheme, descriptionSurah: descriptionSurah, colorScheme: colorScheme),
@@ -78,7 +77,7 @@ class DetailSurahScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 15),
           HeaderTitleSurah(
-            arguments: arguments,
+            arguments: tuple,
             textTheme: textTheme,
             colorScheme: colorScheme,
           ),
@@ -86,7 +85,7 @@ class DetailSurahScreen extends StatelessWidget {
             colorScheme: colorScheme,
             textTheme: textTheme,
             surah: state.surahDetailArabic,
-            surahName: arguments!.item2.namaLatin!,
+            surahName: tuple!.item1,
           ),
         ],
       ),

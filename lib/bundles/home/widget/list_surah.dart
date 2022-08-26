@@ -39,8 +39,14 @@ class ListSurah extends StatelessWidget {
                   surahArabName: surah.nama!,
                   onTap: () {
                     context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: surah.nomor.toString()));
-                    final Tuple2<BuildContext, SurahModels> arguments = Tuple2(context, surah);
-                    Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(arguments: arguments)));
+                    final Tuple5<String, String, String, String, String> tuple = Tuple5(
+                      surah.namaLatin!,
+                      surah.jumlahAyat.toString(),
+                      surah.arti!,
+                      surah.deskripsi!,
+                      surah.audio!,
+                    );
+                    Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(tuple: tuple)));
                   },
                 ),
                 const SizedBox(height: 8),

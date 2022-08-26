@@ -106,11 +106,7 @@ class DetailSurahBody extends StatelessWidget {
                                                     ));
                                                 context.read<LastReadBloc>().add(GetLastReadEvent());
                                                 ScaffoldMessenger.of(context).showSnackBar(
-                                                  const SnackBar(
-                                                      content: Text(
-                                                    'Berhasil Menambahkan Last Read',
-                                                    style: TextStyle(color: Colors.white),
-                                                  )),
+                                                  const SnackBar(content: Text('Berhasil Menambahkan Last Read')),
                                                 );
                                               },
                                               child: Text(
@@ -136,11 +132,7 @@ class DetailSurahBody extends StatelessWidget {
                                                     ));
 
                                                 ScaffoldMessenger.of(context).showSnackBar(
-                                                  const SnackBar(
-                                                      content: Text(
-                                                    'Berhasil Menambahkan Bookmark',
-                                                    style: TextStyle(color: Colors.white),
-                                                  )),
+                                                  const SnackBar(content: Text('Berhasil Menambahkan Bookmark')),
                                                 );
                                               },
                                               child: Text(

@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 import '../bundles/bundles.dart';
-import '../models/models.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return WelcomeScreen.route();
-      case '/home':
         return HomeScreen.route();
+      case '/welcome':
+        return WelcomeScreen.route();
       case '/detail-surah':
-        return DetailSurahScreen.route(arguments: settings.arguments as Tuple2<BuildContext, SurahModels>);
+        return DetailSurahScreen.route(tuple: settings.arguments as Tuple5<String, String, String, String, String>);
       case '/bookmarks':
         return BookmarkScreen.route();
       case '/pray':

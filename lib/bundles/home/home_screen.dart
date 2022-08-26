@@ -9,7 +9,7 @@ import 'widget/widget.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  static const String routeName = '/home';
+  static const String routeName = '/';
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
