@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../models/models.dart';
 import 'base_bookmark_repository.dart';
 
 class BookmarkRepository extends BaseBookmarkRepository {
+  AutoScrollController autoScroll = AutoScrollController();
   DatabaseManager database = DatabaseManager.instance;
   @override
-  Future<void> addBookmark(bool lastRead, String namaSurah, Ayat surah, int indexAyat, BuildContext context) async {
+  Future<void> addBookmark(
+    bool lastRead,
+    String nomorSurah,
+    String namaSurah,
+    Ayat surah,
+    String arti,
+    String deskripsi,
+    String audio,
+    int indexAyat,
+    BuildContext context,
+  ) async {
     Database db = await database.db;
     bool flagExist = false;
 
@@ -16,7 +28,7 @@ class BookmarkRepository extends BaseBookmarkRepository {
     } else {
       List checkData = await db.query(
         "bookmark",
-        columns: ["surah", "ayat", "via", "index_ayat", "last_read"],
+        columns: ["surah", "ayat", "arti", "deskripsi", "audio", "via", "index_ayat", "last_read"],
         where:
             "surah = '${namaSurah.replaceAll("'", "+")}' and ayat = ${surah.nomor} and via = 'surah' and index_ayat = $indexAyat and last_read = 0 ",
       );
@@ -28,21 +40,29 @@ class BookmarkRepository extends BaseBookmarkRepository {
 
     if (flagExist == false) {
       await db.insert("bookmark", {
+        "nomor_surah": nomorSurah,
         "surah": namaSurah.replaceAll("'", "+"),
         "ayat": surah.nomor,
+        "arti": arti,
+        "deskripsi": deskripsi,
+        "audio": audio,
         "via": "surah",
         "index_ayat": indexAyat,
         "last_read": lastRead == true ? 1 : 0,
       });
     }
-    /*  var data = await db.query("bookmark");
+    /* var data = await db.query("bookmark");
     print(data); */
   }
 
   @override
   Future<List<Map<String, dynamic>>> getBookmark() async {
     Database db = await database.db;
-    final List<Map<String, dynamic>> allBookmarks = await db.query("bookmark", where: "last_read = 0");
+    final List<Map<String, dynamic>> allBookmarks = await db.query(
+      "bookmark",
+      where: "last_read = 0",
+      orderBy: "surah",
+    );
     return allBookmarks;
   }
 

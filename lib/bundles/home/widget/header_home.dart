@@ -30,8 +30,8 @@ class HeaderHome extends StatelessWidget {
             } else {
               return _headerHome(
                 textTheme,
+                'Tidak ada',
                 '',
-                'Belum ada surah',
               );
             }
           },
@@ -44,7 +44,7 @@ class HeaderHome extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 30),
+        const SizedBox(height: 10),
         Stack(
           children: [
             Image.asset(
@@ -53,8 +53,8 @@ class HeaderHome extends StatelessWidget {
               width: double.infinity,
             ),
             Positioned(
-                top: 25,
-                left: 20,
+                top: 37,
+                left: 15,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -68,7 +68,7 @@ class HeaderHome extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          'Last Read',
+                          'Terakhir baca',
                           style: textTheme.bodyLarge!.copyWith(
                             fontSize: 17,
                             color: Colors.white,
@@ -77,7 +77,6 @@ class HeaderHome extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 15),
                     Padding(
                       padding: const EdgeInsets.only(left: 3),
                       child: Column(

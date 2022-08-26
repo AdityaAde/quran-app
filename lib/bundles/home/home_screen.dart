@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBarCustom.appBarCustom(
         context,
-        'Quran App',
+        'My Quran',
         textTheme,
         colorScheme,
         IconButton(

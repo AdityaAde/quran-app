@@ -34,7 +34,7 @@ class WelcomeScreenBody extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Quran App',
+          'My Quran',
           style: textTheme.headline1!.copyWith(
             color: colorScheme.primary,
             fontWeight: FontWeight.w700,
@@ -42,7 +42,7 @@ class WelcomeScreenBody extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'Learn Quran and \n Recite once everyday',
+          'Yuk belajar dan \n membaca Al-Qur\'an',
           textAlign: TextAlign.center,
           style: textTheme.headline3!
               .copyWith(fontWeight: FontWeight.w400, color: colorScheme.onBackground.withOpacity(0.5)),
@@ -63,7 +63,7 @@ class WelcomeScreenBody extends StatelessWidget {
           width: 185,
           child: Center(
             child: Text(
-              'Get Started',
+              'Mulai',
               style: textTheme.headline4!.copyWith(color: colorScheme.background),
             ),
           ),

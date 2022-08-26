@@ -32,8 +32,12 @@ class DatabaseManager {
         return await database.execute('''
           CREATE TABLE bookmark (
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            nomor_surah TEXT NOT NULL,
             surah TEXT NOT NULL,
             ayat INTEGER NOT NULL,
+            arti TEXT NOT NULL,
+            deskripsi TEXT NOT NULL,
+            audio TEXT NOT NULL,
             via TEXT NOT NULL,
             index_ayat INTEGER NOT NULL,
             last_read INTEGER DEFAULT 0
@@ -50,7 +54,17 @@ class DatabaseManager {
 }
 
 abstract class BaseBookmarkRepository {
-  Future<void> addBookmark(bool lastRead, String namaSurah, Ayat surah, int indexAyat, BuildContext context);
+  Future<void> addBookmark(
+    bool lastRead,
+    String nomorSurah,
+    String namaSurah,
+    Ayat surah,
+    String arti,
+    String deskripsi,
+    String audio,
+    int indexAyat,
+    BuildContext context,
+  );
   Future<List<Map<String, dynamic>>> getBookmark();
   Future<void> deleteBookmark(int id);
   Future<Map<String, dynamic>?> getLastRead();

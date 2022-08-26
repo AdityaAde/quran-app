@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/bloc/bloc.dart';
+import 'package:tuple/tuple.dart';
 
 import '../../components/components.dart';
+import '../bundles.dart';
 
 class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({Key? key}) : super(key: key);
@@ -68,7 +70,25 @@ class BookmarkScreen extends StatelessWidget {
           child: Card(
             elevation: 3,
             child: ListTile(
-              onTap: () {},
+              onTap: () {
+                context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: data['nomor_surah']));
+                final Tuple5<String, String, String, String, String> tuple = Tuple5(
+                  data['surah'],
+                  data['ayat'].toString(),
+                  data['arti'],
+                  data['deskripsi'],
+                  data['audio'],
+                );
+                Navigator.pushReplacement(
+                  context,
+                  SlideRightRoute(
+                    page: DetailSurahScreen(
+                      tuple: tuple,
+                      toIndexAyat: data['ayat'],
+                    ),
+                  ),
+                );
+              },
               leading: CircleAvatar(
                   backgroundImage: const AssetImage('assets/images/border.png'),
                   radius: 17,

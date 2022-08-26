@@ -24,8 +24,12 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     try {
       await bookmarkRepository.addBookmark(
         event.lastRead,
+        event.nomorSurah,
         event.namaSurah,
         event.surah,
+        event.arti,
+        event.deskripsi,
+        event.audio,
         event.indexAyat,
         event.context,
       );

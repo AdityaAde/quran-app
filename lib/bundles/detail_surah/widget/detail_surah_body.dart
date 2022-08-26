@@ -2,6 +2,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/bloc/bloc.dart';
+import 'package:quran_app/provider/bookmarks/bookmark_repository.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../../models/models.dart';
 
@@ -12,37 +14,56 @@ class DetailSurahBody extends StatelessWidget {
     required this.textTheme,
     required this.surah,
     required this.surahName,
+    required this.arti,
+    required this.deskripsi,
+    required this.audio,
+    required this.index,
+    required this.bookmarkRepository,
   }) : super(key: key);
 
   final ColorScheme colorScheme;
   final TextTheme textTheme;
   final SurahDetailModels surah;
   final String surahName;
+  final String arti;
+  final String deskripsi;
+  final String audio;
+  final int index;
+  final BookmarkRepository bookmarkRepository;
+
   final AudioPlayer audioPLayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: surah.ayat!.length,
-      itemBuilder: (context, index) {
-        final surahDetail = surah.ayat![index];
-        final indexSurah = index + 1;
+    final surahDetail = surah.ayat![index];
+    final indexSurah = index + 1;
 
-        return Column(
+    return AutoScrollTag(
+      key: ValueKey(index + 2),
+      index: index + 2,
+      controller: bookmarkRepository.autoScroll,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: Column(
           children: [
-            _headerSurah(indexSurah, context, surahDetail),
+            _headerSurah(indexSurah, context, surahDetail, arti, deskripsi, audio),
             const SizedBox(height: 15),
             _bodySurah(surahDetail),
             const SizedBox(height: 30),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 
-  Padding _headerSurah(int indexSurah, BuildContext context, Ayat surahDetail) {
+  Padding _headerSurah(
+    int indexSurah,
+    BuildContext context,
+    Ayat surahDetail,
+    String arti,
+    String deskripsi,
+    String audio,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 28),
       child: Container(
@@ -92,25 +113,35 @@ class DetailSurahBody extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                fixedSize: const Size(100, 30),
+                                                fixedSize: const Size(130, 30),
                                                 primary: colorScheme.secondary,
                                               ),
                                               onPressed: () async {
                                                 Navigator.pop(context);
-                                                context.read<BookmarkBloc>().add(AddBookmarkEvent(
-                                                      lastRead: true,
-                                                      namaSurah: surahName,
-                                                      surah: surahDetail,
-                                                      indexAyat: indexSurah,
-                                                      context: context,
-                                                    ));
+                                                context.read<BookmarkBloc>().add(
+                                                      AddBookmarkEvent(
+                                                        lastRead: true,
+                                                        nomorSurah: surah.nomor.toString(),
+                                                        namaSurah: surahName,
+                                                        surah: surahDetail,
+                                                        arti: arti,
+                                                        deskripsi: deskripsi,
+                                                        audio: audio,
+                                                        indexAyat: indexSurah,
+                                                        context: context,
+                                                      ),
+                                                    );
                                                 context.read<LastReadBloc>().add(GetLastReadEvent());
                                                 ScaffoldMessenger.of(context).showSnackBar(
-                                                  const SnackBar(content: Text('Berhasil Menambahkan Last Read')),
+                                                  const SnackBar(
+                                                    content: Text(
+                                                      'Berhasil Menambahkan Sebagai Terakhir dibaca',
+                                                    ),
+                                                  ),
                                                 );
                                               },
                                               child: Text(
-                                                'Last Read',
+                                                'Terakhir dibaca',
                                                 style: textTheme.bodyLarge!.copyWith(
                                                   color: colorScheme.onPrimary,
                                                 ),
@@ -118,15 +149,19 @@ class DetailSurahBody extends StatelessWidget {
                                             ),
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                fixedSize: const Size(100, 30),
+                                                fixedSize: const Size(130, 30),
                                                 primary: colorScheme.secondary,
                                               ),
                                               onPressed: () {
                                                 Navigator.pop(context);
                                                 context.read<BookmarkBloc>().add(AddBookmarkEvent(
                                                       lastRead: false,
+                                                      nomorSurah: surah.nomor.toString(),
                                                       namaSurah: surahName,
                                                       surah: surahDetail,
+                                                      arti: arti,
+                                                      deskripsi: deskripsi,
+                                                      audio: audio,
                                                       indexAyat: indexSurah,
                                                       context: context,
                                                     ));

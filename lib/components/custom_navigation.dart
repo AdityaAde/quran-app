@@ -22,15 +22,7 @@ class CustomNavbar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            InkWell(
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Not Implemented Yet'),
-                    ),
-                  );
-                },
-                child: Image.asset('assets/images/quran.png')),
+            InkWell(onTap: () {}, child: Image.asset('assets/images/quran.png')),
             InkWell(
               onTap: () {
                 Navigator.push(context, SlideTopRoute(page: const PrayScreen()));
