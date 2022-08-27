@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Create [SurahTile] Widget tile yang menampikan informasi surah
+/// berupa index surah, nama surah, ayat, dan bahasa dalam arab nya
 class SurahTile extends StatelessWidget {
   const SurahTile({
     Key? key,

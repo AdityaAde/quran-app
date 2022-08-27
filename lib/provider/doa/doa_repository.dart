@@ -4,6 +4,9 @@ import 'package:http/http.dart' as http;
 import '../../models/models.dart';
 import 'base_doa_repository.dart';
 
+/// Create [DoaRepository] sebagai proses untuk mendapatkan
+/// list dari doa-doa
+
 class DoaRepository extends BaseDoaRepository {
   @override
   Future<ListDoaModels> listDoa() async {

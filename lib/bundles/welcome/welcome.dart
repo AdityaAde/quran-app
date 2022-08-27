@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'widget/welcome_screen_body.dart';
 
+/// [WelcomeScreen] Halaman yang akan tampil hanya sekali pada saat
+/// Aplikasi pertama kali di jalankan.
+
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 

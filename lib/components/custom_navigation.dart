@@ -5,6 +5,9 @@ import '../bundles/bundles.dart';
 import '../config/theme/theme_cubit.dart';
 import 'route_transition.dart';
 
+/// Create [CustomNavbar] Sebuah widget custom yang digunakan
+/// untuk melakukan navigasi di halaman utama
+
 class CustomNavbar extends StatelessWidget {
   const CustomNavbar({Key? key}) : super(key: key);
 

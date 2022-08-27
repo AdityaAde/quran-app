@@ -9,6 +9,8 @@ import 'widget/widget.dart';
 import '../../bloc/bloc.dart';
 import '../../components/components.dart';
 
+/// [DetailSurahScreen] Halaman yang menampilkan detail dari surah
+
 class DetailSurahScreen extends StatelessWidget {
   const DetailSurahScreen({Key? key, this.tuple, this.toIndexAyat}) : super(key: key);
 

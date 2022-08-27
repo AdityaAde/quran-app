@@ -3,6 +3,7 @@ import 'package:tuple/tuple.dart';
 
 import '../bundles/bundles.dart';
 
+/// Create [AppRouter] Data class for storing application's routes and navigationBar's configuration.
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {

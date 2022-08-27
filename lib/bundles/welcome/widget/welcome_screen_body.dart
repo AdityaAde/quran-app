@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../components/components.dart';
 import '../../bundles.dart';
 
+/// Widget body dari WelcomeScreen
+
 class WelcomeScreenBody extends StatelessWidget {
   const WelcomeScreenBody({Key? key}) : super(key: key);
 

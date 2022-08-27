@@ -6,8 +6,14 @@ import '../../models/models.dart';
 import 'base_bookmark_repository.dart';
 
 class BookmarkRepository extends BaseBookmarkRepository {
+  // Objek yang digunakan untuk melakukan auto scroll
   AutoScrollController autoScroll = AutoScrollController();
+
+  /// Objek yang digunakan untuk mendapatkan turunan di [DatabaseManager]
   DatabaseManager database = DatabaseManager.instance;
+
+  /// Override [addBookmark] yang digunakan untuk menambahkan data kedalam bookmark
+  /// kedalam lokal database
   @override
   Future<void> addBookmark(
     bool lastRead,
@@ -23,6 +29,7 @@ class BookmarkRepository extends BaseBookmarkRepository {
     Database db = await database.db;
     bool flagExist = false;
 
+    /// Kondisi apabila lastread yang ada pada lokal database bernilai TRUE
     if (lastRead == true) {
       await db.delete("bookmark", where: "last_read = 1");
     } else {
@@ -33,11 +40,13 @@ class BookmarkRepository extends BaseBookmarkRepository {
             "surah = '${namaSurah.replaceAll("'", "+")}' and ayat = ${surah.nomor} and via = 'surah' and index_ayat = $indexAyat and last_read = 0 ",
       );
       if (checkData.isNotEmpty) {
-        // Ada data
+        // Terdapat data yang sama di dalam lokal database
         flagExist = true;
       }
     }
 
+    /// Kondisi apabila tidak ada data yang sama pada lokal database
+    /// maka akan melakukan INSERT pada database
     if (flagExist == false) {
       await db.insert("bookmark", {
         "nomor_surah": nomorSurah,
@@ -55,6 +64,8 @@ class BookmarkRepository extends BaseBookmarkRepository {
     print(data); */
   }
 
+  /// Override [getBookmark] yang digunakan untuk mendapatkan data bookmark
+  /// di dalam lokal database
   @override
   Future<List<Map<String, dynamic>>> getBookmark() async {
     Database db = await database.db;
@@ -66,12 +77,16 @@ class BookmarkRepository extends BaseBookmarkRepository {
     return allBookmarks;
   }
 
+  /// Override [deleteBookmark] yang digunakan untuk menghapus data bookmark
+  /// di dalam lokal database
   @override
   Future<void> deleteBookmark(int id) async {
     Database db = await database.db;
     await db.delete("bookmark", where: "id = $id");
   }
 
+  /// Override [getLastRead] yang digunakan untuk mendapatkan data last read
+  /// di dalam lokal database
   @override
   Future<Map<String, dynamic>?> getLastRead() async {
     Database db = await database.db;

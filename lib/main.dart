@@ -18,14 +18,18 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   final getValueOnBoarding = prefs.getBool('onboarding') ?? false;
   BlocOverrides.runZoned(
-    () => runApp(MyApp(valueOnBoard: getValueOnBoarding)),
+    () => runApp(MyQuranApp(valueOnBoard: getValueOnBoarding)),
     blocObserver: BlocBuilderObserver(),
   );
 }
 
-class MyApp extends StatelessWidget {
+/// Main class to run the application.
+
+class MyQuranApp extends StatelessWidget {
   final bool valueOnBoard;
-  const MyApp({Key? key, required this.valueOnBoard}) : super(key: key);
+  const MyQuranApp({Key? key, required this.valueOnBoard}) : super(key: key);
+
+  /// This widget is the root of your application.
 
   @override
   Widget build(BuildContext context) {

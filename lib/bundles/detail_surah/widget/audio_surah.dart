@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/bloc.dart';
 
+/// Create [AudioSurah] Widget yang digunakan untuk melakukan PLAY/PAUSE
+/// pada audio surah
 class AudioSurah extends StatefulWidget {
   const AudioSurah({
     Key? key,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// [InfoSurah] Widget yang menampilkan informasi dari surah
 class InfoSurah extends StatelessWidget {
   const InfoSurah({
     Key? key,

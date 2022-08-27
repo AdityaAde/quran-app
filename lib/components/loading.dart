@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Widget [Loading] menampilkan animasi dari loading
+
 class Loading extends StatelessWidget {
   const Loading({Key? key}) : super(key: key);
 

@@ -4,6 +4,9 @@ import 'package:http/http.dart' as http;
 import 'base_detail_surah_repository.dart';
 import '../../models/models.dart';
 
+/// Create [DetailSurahRepository] sebagai proses untuk mendapatkan
+/// Detail dari surah
+
 class DetailSurahRepository extends BaseDetailSurahRepository {
   @override
   Future<SurahDetailModels> getDetailSurah(surahIndex) async {

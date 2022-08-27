@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/bloc.dart';
 
+/// [HeaderHome] adalah sebuah widget yang menampilan sebuah keterangan
+/// pada bagian atas di halaman HomeScreen yang berisi keterangan tentang
+/// surah yang terakhir kali dibaca
+
 class HeaderHome extends StatelessWidget {
   const HeaderHome({Key? key, required this.textTheme, required this.colorScheme}) : super(key: key);
 

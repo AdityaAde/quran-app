@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// [lightTheme] Defines LIGHT theme color scheme.
 ThemeData lightTheme() {
   return ThemeData(
     appBarTheme: const AppBarTheme(
@@ -79,6 +80,7 @@ ColorScheme _colorSchemeLightTheme() {
   );
 }
 
+/// [darkTheme] Defines DARK theme color scheme.
 ThemeData darkTheme() {
   return ThemeData(
     appBarTheme: const AppBarTheme(iconTheme: IconThemeData(color: Colors.white)),

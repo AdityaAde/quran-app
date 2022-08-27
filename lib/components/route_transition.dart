@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Animasi yang digunakan saat melakukan navigasi ke halaman lain
+
 class SlideRightRoute extends PageRouteBuilder {
   final Widget page;
   SlideRightRoute({required this.page})

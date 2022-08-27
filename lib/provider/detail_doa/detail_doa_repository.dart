@@ -4,6 +4,9 @@ import 'package:quran_app/provider/provider.dart';
 import 'package:http/http.dart' as http;
 import '../../models/models.dart';
 
+/// Create [DetailDoaRepository] sebagai proses untuk mendapatkan
+/// Detail doa
+
 class DetailDoaRepository extends BaseDetailDoaRepository {
   @override
   Future<DetailDoaModels> getDetailDoa(String id) async {

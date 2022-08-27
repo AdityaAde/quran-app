@@ -6,6 +6,8 @@ import 'package:tuple/tuple.dart';
 import '../../components/components.dart';
 import '../bundles.dart';
 
+/// Halaman [BookmarkScreen] menampilan data dari bookmark
+
 class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({Key? key}) : super(key: key);
 

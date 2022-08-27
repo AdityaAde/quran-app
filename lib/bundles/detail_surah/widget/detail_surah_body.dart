@@ -2,10 +2,13 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/bloc/bloc.dart';
-import 'package:quran_app/provider/bookmarks/bookmark_repository.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../../models/models.dart';
+import '../../../provider/provider.dart';
+
+/// [DetailSurahBody] Widget untuk menampilkan body dari
+/// halaman DetailSurahScreen
 
 class DetailSurahBody extends StatelessWidget {
   DetailSurahBody({

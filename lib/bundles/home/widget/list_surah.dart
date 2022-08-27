@@ -8,6 +8,8 @@ import '../../../models/surah_models.dart';
 import '../../bundles.dart';
 import 'surah_tile.dart';
 
+/// Create [ListSurah] sebuah widget yang menampilkan sebuah list dari surah pada UI
+
 class ListSurah extends StatelessWidget {
   const ListSurah({
     Key? key,

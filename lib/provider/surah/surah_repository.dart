@@ -4,6 +4,9 @@ import 'base_surah_repository.dart';
 
 import '../../models/surah_models.dart';
 
+/// Create [SurahRepository] sebagai proses untuk mendapatkan
+/// list dari surah
+
 class SurahRepository extends BaseSurahRepository {
   @override
   Future<List<SurahModels>> getSurah() async {

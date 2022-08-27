@@ -7,6 +7,7 @@ import '../../../components/components.dart';
 import '../../../models/models.dart';
 import '../../bundles.dart';
 
+/// [SearchSurah] Halaman yang berfungsi untuk melakukan pencarian pada surah
 class SearchSurah extends SearchDelegate {
   List<SurahModels> listSurah;
   SearchSurah({required this.listSurah});

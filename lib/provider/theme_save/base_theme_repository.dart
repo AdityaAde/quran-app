@@ -6,6 +6,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+/// Create [DatabaseThemeManager] sebagai class untuk membuat TABLE
+/// penyimpanan tema
+
 class DatabaseThemeManager {
   DatabaseThemeManager._private();
 

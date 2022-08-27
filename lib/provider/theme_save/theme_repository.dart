@@ -1,6 +1,8 @@
 import 'package:sqflite/sqflite.dart';
 import '../provider.dart';
 
+/// Create [ThemeRepository] sebagai prosess penyimpanan tema
+
 class ThemeRepository extends BaseThemeRepository {
   DatabaseThemeManager database = DatabaseThemeManager.instance;
   @override
@@ -20,6 +22,7 @@ class ThemeRepository extends BaseThemeRepository {
     print(data); */
   }
 
+  /// Fungsi untuk mendapatkan kondisi tema saat ini
   @override
   Future<Map<String, dynamic>?> getTheme() async {
     Database db = await database.db;

@@ -1,9 +1,5 @@
-import 'dart:convert';
-
-List<SurahModels> surahModelsFromJson(String str) =>
-    List<SurahModels>.from(json.decode(str).map((x) => SurahModels.fromJson(x)));
-
-String surahModelsToJson(List<SurahModels> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+/// Create [SurahModels] sebagai data model untuk menampung
+/// data dari List Surah
 
 class SurahModels {
   SurahModels({

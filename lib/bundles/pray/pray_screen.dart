@@ -5,6 +5,8 @@ import '../../bloc/bloc.dart';
 import '../../components/components.dart';
 import 'widget/list_doa.dart';
 
+/// [PrayScreen] Halaman yang menampilam isi dari List Doa
+
 class PrayScreen extends StatelessWidget {
   const PrayScreen({Key? key}) : super(key: key);
 

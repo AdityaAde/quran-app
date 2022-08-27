@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Create [AppBarCustom] Widget yang digunakan untuk menampilkan
+/// sebuah custom AppBar
 class AppBarCustom {
   static PreferredSizeWidget appBarCustom(
     BuildContext context,

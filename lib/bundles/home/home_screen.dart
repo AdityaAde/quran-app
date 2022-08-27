@@ -6,6 +6,9 @@ import '../../components/components.dart';
 import 'widget/search_surah.dart';
 import 'widget/widget.dart';
 
+/// [HomeScreen] Halaman landing page setelah User melakukan tap
+/// dari halaman WelcomeScreen
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 

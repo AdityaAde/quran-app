@@ -5,6 +5,8 @@ import 'package:tuple/tuple.dart';
 import '../../bloc/bloc.dart';
 import '../../components/components.dart';
 
+/// [DetailPrayScreen] Halaman yang menampilam dari dari Doa-doa
+
 class DetailPrayScreen extends StatelessWidget {
   const DetailPrayScreen({Key? key, this.arguments}) : super(key: key);
 

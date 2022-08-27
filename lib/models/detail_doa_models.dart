@@ -1,8 +1,5 @@
-import 'dart:convert';
-
-DetailDoaModels detailDoaModelsFromJson(String str) => DetailDoaModels.fromJson(json.decode(str));
-
-String detailDoaModelsToJson(DetailDoaModels data) => json.encode(data.toJson());
+/// Create [DetailDoaModels] sebagai data model untuk menampung
+/// data dari Detail Doa
 
 class DetailDoaModels {
   DetailDoaModels({

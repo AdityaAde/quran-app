@@ -4,6 +4,8 @@ import 'package:tuple/tuple.dart';
 
 import '../../../bloc/bloc.dart';
 
+/// [HeaderTitleSurah] Widget yang menampilkan detail dari surah, arti, dan jumlah ayat pada bagian atas
+/// di halaman DetailSurahScreen
 class HeaderTitleSurah extends StatelessWidget {
   const HeaderTitleSurah({
     Key? key,

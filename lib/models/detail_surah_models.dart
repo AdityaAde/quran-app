@@ -1,8 +1,5 @@
-import 'dart:convert';
-
-SurahDetailModels surahDetailModelsFromJson(String str) => SurahDetailModels.fromJson(json.decode(str));
-
-String surahDetailModelsToJson(SurahDetailModels data) => json.encode(data.toJson());
+/// Create [SurahDetailModels] sebagai data model untuk menampung
+/// data dari Detail Surah
 
 class SurahDetailModels {
   SurahDetailModels({

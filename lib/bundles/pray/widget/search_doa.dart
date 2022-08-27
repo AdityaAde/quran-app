@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuple/tuple.dart';
 
-import '../../../../bloc/bloc.dart';
-import '../../../../components/components.dart';
-import '../../../../models/models.dart';
-import '../../../bundles.dart';
+import '../../../bloc/bloc.dart';
+import '../../../components/components.dart';
+import '../../../models/models.dart';
+import '../../bundles.dart';
+
+/// [SearchDoa] Halaman yang berfungsi untuk melakukan pencarian pada doa-doa
 
 class SearchDoa extends SearchDelegate {
   ListDoaModels listDoa;

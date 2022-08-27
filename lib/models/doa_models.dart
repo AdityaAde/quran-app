@@ -1,8 +1,5 @@
-import 'dart:convert';
-
-ListDoaModels listDoaModelsFromJson(String str) => ListDoaModels.fromJson(json.decode(str));
-
-String listDoaModelsToJson(ListDoaModels data) => json.encode(data.toJson());
+/// Create [ListDoaModels] sebagai data model untuk menampung
+/// data dari List Doa
 
 class ListDoaModels {
   ListDoaModels({

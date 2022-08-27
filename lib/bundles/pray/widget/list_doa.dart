@@ -5,7 +5,9 @@ import 'package:quran_app/models/doa_models.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../../components/components.dart';
-import 'widget/search_doa.dart';
+import 'search_doa.dart';
+
+/// Widget [ListDoa] yang digunakan untuk menampilkan list dari doa-doa
 
 class ListDoa extends StatelessWidget {
   const ListDoa({

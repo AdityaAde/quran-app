@@ -8,6 +8,9 @@ import 'package:path/path.dart';
 import 'package:quran_app/models/detail_surah_models.dart';
 import 'package:sqflite/sqflite.dart';
 
+/// Create [DatabaseManager] sebagai class untuk membuat TABLE
+/// penyimpanan data bookmark
+
 class DatabaseManager {
   DatabaseManager._private();
 
