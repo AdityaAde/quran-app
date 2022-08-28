@@ -10,9 +10,10 @@ class AppBarCustom {
     ColorScheme colorScheme,
     Widget widget,
   ) {
+    final namaSurah = title.replaceAll("+", "'");
     return AppBar(
       title: Text(
-        title,
+        namaSurah,
         style: textTheme.headline4!.copyWith(color: colorScheme.primary),
       ),
       backgroundColor: Colors.transparent,

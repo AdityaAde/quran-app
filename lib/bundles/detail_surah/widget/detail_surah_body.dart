@@ -223,7 +223,11 @@ class DetailSurahBody extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               surahDetail.idn!,
-              style: textTheme.bodyLarge!.copyWith(fontSize: 15, fontWeight: FontWeight.w400),
+              style: textTheme.bodyLarge!.copyWith(
+                fontSize: 15,
+                fontWeight: FontWeight.w300,
+                color: colorScheme.onBackground.withOpacity(0.7),
+              ),
               textDirection: TextDirection.ltr,
             ),
           ),

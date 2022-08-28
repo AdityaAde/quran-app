@@ -72,17 +72,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              children: [
-                HeaderHome(
-                  textTheme: textTheme,
-                  colorScheme: colorScheme,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Stack(
+          children: [
+            CustomScrollView(
+              slivers: <Widget>[
+                SliverAppBar(
+                  backgroundColor: colorScheme.background,
+                  expandedHeight: 250.0,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: HeaderHome(
+                      textTheme: textTheme,
+                      colorScheme: colorScheme,
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 15),
                 ListSurah(
                   listSurah: state.listSurah,
                   textTheme: textTheme,
@@ -90,12 +95,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-          ),
-          const Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomNavbar(),
-          ),
-        ],
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomNavbar(),
+            ),
+          ],
+        ),
       ),
     );
   }

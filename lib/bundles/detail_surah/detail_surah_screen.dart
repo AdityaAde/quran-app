@@ -18,6 +18,8 @@ class DetailSurahScreen extends StatelessWidget {
   /// item1 = nama latin, item2 = ayat, item3 = arti, item4 = deksripsi, item5 = audio
 
   final Tuple5<String, String, String, String, String>? tuple;
+
+  // Objek yang digunakan untuk melakukan auto scroll ke detail ayat
   final int? toIndexAyat;
 
   static const String routeName = '/detail-surah';

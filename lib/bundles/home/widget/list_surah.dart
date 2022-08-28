@@ -24,41 +24,87 @@ class ListSurah extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-          itemCount: listSurah.length,
-          itemBuilder: (context, index) {
-            final surah = listSurah[index];
-            return Column(
-              children: [
-                const SizedBox(height: 10),
-                SurahTile(
-                  surahIndex: surah.nomor!,
-                  textTheme: textTheme,
-                  colorScheme: colorScheme,
-                  surahEnglishName: surah.namaLatin!,
-                  ayahSurah: surah.jumlahAyat!,
-                  surahArabName: surah.nama!,
-                  onTap: () {
-                    context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: surah.nomor.toString()));
-                    final Tuple5<String, String, String, String, String> tuple = Tuple5(
-                      surah.namaLatin!,
-                      surah.jumlahAyat.toString(),
-                      surah.arti!,
-                      surah.deskripsi!,
-                      surah.audio!,
-                    );
-                    Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(tuple: tuple)));
-                  },
-                ),
-                const SizedBox(height: 8),
-                Divider(
-                  thickness: 1,
-                  color: colorScheme.onBackground.withOpacity(0.1),
-                ),
-              ],
-            );
-          }),
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          final surah = listSurah[index];
+
+          return Column(
+            children: [
+              const SizedBox(height: 10),
+              SurahTile(
+                surahIndex: surah.nomor!,
+                textTheme: textTheme,
+                colorScheme: colorScheme,
+                surahEnglishName: surah.namaLatin!,
+                ayahSurah: surah.jumlahAyat!,
+                surahArabName: surah.nama!,
+                onTap: () {
+                  // Trigger untuk melakukan get detail surah
+                  context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: surah.nomor.toString()));
+
+                  // Data yang dibutuhkan pada halaman detail surah
+                  final Tuple5<String, String, String, String, String> tuple = Tuple5(
+                    surah.namaLatin!,
+                    surah.jumlahAyat.toString(),
+                    surah.arti!,
+                    surah.deskripsi!,
+                    surah.audio!,
+                  );
+                  Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(tuple: tuple)));
+                },
+              ),
+              const SizedBox(height: 8),
+              Divider(
+                thickness: 1,
+                color: colorScheme.onBackground.withOpacity(0.1),
+              ),
+            ],
+          );
+        },
+        childCount: listSurah.length,
+      ),
     );
+
+    /* Expanded(
+      child: ListView.builder(
+        itemCount: listSurah.length,
+        itemBuilder: (context, index) {
+          final surah = listSurah[index];
+          return Column(
+            children: [
+              const SizedBox(height: 10),
+              SurahTile(
+                surahIndex: surah.nomor!,
+                textTheme: textTheme,
+                colorScheme: colorScheme,
+                surahEnglishName: surah.namaLatin!,
+                ayahSurah: surah.jumlahAyat!,
+                surahArabName: surah.nama!,
+                onTap: () {
+                  // Trigger untuk melakukan get detail surah
+                  context.read<DetailSurahBloc>().add(GetDetailSurahEvent(surahIndex: surah.nomor.toString()));
+
+                  // Data yang dibutuhkan pada halaman detail surah
+                  final Tuple5<String, String, String, String, String> tuple = Tuple5(
+                    surah.namaLatin!,
+                    surah.jumlahAyat.toString(),
+                    surah.arti!,
+                    surah.deskripsi!,
+                    surah.audio!,
+                  );
+                  Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(tuple: tuple)));
+                },
+              ),
+              const SizedBox(height: 8),
+              Divider(
+                thickness: 1,
+                color: colorScheme.onBackground.withOpacity(0.1),
+              ),
+            ],
+          );
+        },
+      ),
+    ); */
   }
 }
