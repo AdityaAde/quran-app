@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/bloc.dart';
@@ -25,6 +26,55 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //===================================================================================================
+  // Variable untuk melakukan animasi saat melakukan SCROLL ke atas atau bawah
+  ScrollController scrollBottomBarController = ScrollController(); // set controller on scrolling
+  bool isScrollingDown = false;
+  bool _show = true;
+  double bottomBarHeight = 75; //
+
+  @override
+  void initState() {
+    super.initState();
+    myScroll();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollBottomBarController.removeListener(() {});
+  }
+
+  void showBottomBar() {
+    setState(() {
+      _show = true;
+    });
+  }
+
+  void hideBottomBar() {
+    setState(() {
+      _show = false;
+    });
+  }
+
+  void myScroll() async {
+    scrollBottomBarController.addListener(() {
+      if (scrollBottomBarController.position.userScrollDirection == ScrollDirection.reverse) {
+        if (!isScrollingDown) {
+          isScrollingDown = true;
+          hideBottomBar();
+        }
+      }
+      if (scrollBottomBarController.position.userScrollDirection == ScrollDirection.forward) {
+        if (isScrollingDown) {
+          isScrollingDown = false;
+          showBottomBar();
+        }
+      }
+    });
+  }
+  //===================================================================================================
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -77,6 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Stack(
           children: [
             CustomScrollView(
+              controller: scrollBottomBarController,
               slivers: <Widget>[
                 SliverAppBar(
                   backgroundColor: colorScheme.background,
@@ -95,9 +146,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            const Align(
+            Align(
               alignment: Alignment.bottomCenter,
-              child: CustomNavbar(),
+              child: CustomNavbar(heightContainer: _show ? 45 : 0),
             ),
           ],
         ),

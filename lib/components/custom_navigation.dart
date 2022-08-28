@@ -9,19 +9,22 @@ import 'route_transition.dart';
 /// untuk melakukan navigasi di halaman utama
 
 class CustomNavbar extends StatelessWidget {
-  const CustomNavbar({Key? key}) : super(key: key);
+  const CustomNavbar({Key? key, required this.heightContainer}) : super(key: key);
+
+  final double heightContainer;
 
   @override
   Widget build(BuildContext context) {
     var isChangeTheme = false;
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 149, 96, 223),
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
-        height: 45,
+        height: heightContainer,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
