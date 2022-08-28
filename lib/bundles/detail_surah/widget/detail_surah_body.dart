@@ -195,7 +195,9 @@ class DetailSurahBody extends StatelessWidget {
                         color: colorScheme.primary,
                       ),
                     ),
-                    const TafsirSurah(),
+
+                    // Menampilkan tafsir dari ayat surah
+                    TafsirSurah(ayatSurah: indexSurah),
                   ],
                 )
               ],

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../../bloc/bloc.dart';
+import '../../../bloc/tafsir/tafsir_bloc.dart';
 import '../../../components/route_transition.dart';
 import '../../../models/surah_models.dart';
 import '../../bundles.dart';
@@ -51,6 +52,9 @@ class ListSurah extends StatelessWidget {
                     surah.deskripsi!,
                     surah.audio!,
                   );
+
+                  // Trigger untuk mendapatkan Tafsir dari tiap ayah surah pada halaman Detail Surah
+                  context.read<TafsirBloc>().add(GetTafsirEvent(nomorSurah: surah.nomor.toString()));
                   Navigator.push(context, SlideRightRoute(page: DetailSurahScreen(tuple: tuple)));
                 },
               ),

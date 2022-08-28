@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/bloc/tafsir/tafsir_bloc.dart';
 import 'package:quran_app/bloc_observer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,6 +40,7 @@ class MyQuranApp extends StatelessWidget {
         BlocProvider<ListSurahBloc>(create: (context) => ListSurahBloc()..add(GetSurahEvent())),
         BlocProvider<LastReadBloc>(create: (context) => LastReadBloc()..add(GetLastReadEvent())),
         BlocProvider<DetailSurahBloc>(create: (context) => DetailSurahBloc()),
+        BlocProvider<TafsirBloc>(create: (context) => TafsirBloc()),
         BlocProvider<AudioSurahBloc>(create: (context) => AudioSurahBloc()),
         BlocProvider<BookmarkBloc>(create: (context) => BookmarkBloc()),
         BlocProvider<DoaBloc>(create: (context) => DoaBloc()),
