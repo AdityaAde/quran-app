@@ -4,3 +4,4 @@ export 'bookmarks/bookmarks.dart';
 export 'doa/doa.dart';
 export 'theme_save/theme_save.dart';
 export 'detail_doa/detail_doa.dart';
+export 'tafsir/tafsir.dart';

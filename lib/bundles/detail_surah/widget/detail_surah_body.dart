@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/bloc/bloc.dart';
+import 'package:quran_app/bundles/detail_surah/widget/tafsir_surah.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../../models/models.dart';
@@ -83,6 +84,7 @@ class DetailSurahBody extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Ayat surah
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: CircleAvatar(
@@ -94,6 +96,7 @@ class DetailSurahBody extends StatelessWidget {
                     ),
                   ),
                 ),
+                // Icon bookmark dan Tafsir
                 Row(
                   children: [
                     IconButton(
@@ -191,7 +194,8 @@ class DetailSurahBody extends StatelessWidget {
                         Icons.bookmark_outline,
                         color: colorScheme.primary,
                       ),
-                    )
+                    ),
+                    const TafsirSurah(),
                   ],
                 )
               ],

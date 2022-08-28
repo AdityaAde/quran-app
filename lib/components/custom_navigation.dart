@@ -16,6 +16,7 @@ class CustomNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isChangeTheme = false;
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: AnimatedContainer(
@@ -28,7 +29,13 @@ class CustomNavbar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            InkWell(onTap: () {}, child: Image.asset('assets/images/quran.png')),
+            // Quran surah
+            InkWell(
+              onTap: () {},
+              child: Image.asset('assets/images/quran.png'),
+            ),
+
+            // Navigasi ke halaman Doa-doa
             InkWell(
               onTap: () {
                 Navigator.push(context, SlideTopRoute(page: const PrayScreen()));
@@ -36,6 +43,8 @@ class CustomNavbar extends StatelessWidget {
               },
               child: Image.asset('assets/images/pray.png'),
             ),
+
+            // Navigasi ke halaman bookmark
             InkWell(
               onTap: () {
                 Navigator.push(context, SlideTopRoute(page: const BookmarkScreen()));
@@ -43,6 +52,8 @@ class CustomNavbar extends StatelessWidget {
               },
               child: Image.asset('assets/images/bookmark.png'),
             ),
+
+            // Fungsi untuk mengganti tema LIGHT or DARK
             InkWell(
               onTap: () {
                 isChangeTheme = !isChangeTheme;

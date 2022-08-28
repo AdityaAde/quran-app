@@ -11,6 +11,9 @@ void main() async {
   DetailDoaRepository detailDoaRepository = DetailDoaRepository();
   await detailDoaRepository.getDetailDoa('1');
 
+  TafsirRepository tafsirRepository = TafsirRepository();
+  await tafsirRepository.getTafsirAyah('1');
+
   await getDoa();
   await getDetailDoa(1);
 }

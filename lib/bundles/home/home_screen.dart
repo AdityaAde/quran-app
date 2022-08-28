@@ -146,9 +146,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+
+            // Bottom navigasi bar
             Align(
               alignment: Alignment.bottomCenter,
-              child: CustomNavbar(heightContainer: _show ? 45 : 0),
+              child: CustomNavbar(heightContainer: _show ? 47 : 0),
             ),
           ],
         ),
