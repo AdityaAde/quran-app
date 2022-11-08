@@ -9,6 +9,7 @@ class AppBarCustom {
     TextTheme textTheme,
     ColorScheme colorScheme,
     Widget widget,
+    PreferredSizeWidget? bottom,
   ) {
     final namaSurah = title.replaceAll("+", "'");
     return AppBar(
@@ -19,6 +20,7 @@ class AppBarCustom {
       backgroundColor: Colors.transparent,
       elevation: 0,
       actions: [widget],
+      bottom: bottom,
     );
   }
 }

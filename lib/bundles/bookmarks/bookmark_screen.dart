@@ -31,6 +31,7 @@ class BookmarkScreen extends StatelessWidget {
           textTheme,
           colorScheme,
           const SizedBox(),
+          null,
         ),
         body: BlocBuilder<BookmarkBloc, BookmarkState>(
           builder: (context, state) {

@@ -121,6 +121,7 @@ class DetailSurahScreen extends StatelessWidget {
         textTheme,
         colorScheme,
         InfoSurah(textTheme: textTheme, descriptionSurah: descriptionSurah, colorScheme: colorScheme),
+        null,
       ),
       body: ListView(
         controller: bookmarkRepository.autoScroll,

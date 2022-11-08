@@ -121,6 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: colorScheme.onBackground.withOpacity(0.5),
           ),
         ),
+        null,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),

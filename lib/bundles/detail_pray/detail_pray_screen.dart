@@ -26,13 +26,7 @@ class DetailPrayScreen extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBarCustom.appBarCustom(
-        context,
-        arguments!.item2,
-        textTheme,
-        colorScheme,
-        const SizedBox(),
-      ),
+      appBar: AppBarCustom.appBarCustom(context, arguments!.item2, textTheme, colorScheme, const SizedBox(), null),
       body: BlocBuilder<DetailDoaBloc, DetailDoaState>(
         builder: (context, state) {
           return BlocBuilder<DetailDoaBloc, DetailDoaState>(

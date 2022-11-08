@@ -9,7 +9,8 @@ import 'route_transition.dart';
 /// untuk melakukan navigasi di halaman utama
 
 class CustomNavbar extends StatelessWidget {
-  const CustomNavbar({Key? key, required this.heightContainer}) : super(key: key);
+  const CustomNavbar({Key? key, required this.heightContainer})
+      : super(key: key);
 
   final double heightContainer;
 
@@ -38,7 +39,8 @@ class CustomNavbar extends StatelessWidget {
             // Navigasi ke halaman Doa-doa
             InkWell(
               onTap: () {
-                Navigator.push(context, SlideTopRoute(page: const PrayScreen()));
+                Navigator.push(
+                    context, SlideTopRoute(page: const PrayScreen()));
                 context.read<DoaBloc>().add(GetListDoa());
               },
               child: Image.asset('assets/images/pray.png'),
@@ -47,7 +49,13 @@ class CustomNavbar extends StatelessWidget {
             // Navigasi ke halaman bookmark
             InkWell(
               onTap: () {
-                Navigator.push(context, SlideTopRoute(page: const BookmarkScreen()));
+                //Navigator.push(context, SlideTopRoute(page: const BookmarkScreenNew()));
+
+                /// TODO: Update Halaman Bookmark
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookmarkScreen()));
                 context.read<BookmarkBloc>().add(GetBookmarkEvent());
               },
               child: Image.asset('assets/images/bookmark.png'),
