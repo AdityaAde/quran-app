@@ -1,0 +1,21 @@
+default_platform(:android)
+platform :android do
+  desc "development env"
+  lane :android_beta_app do
+    Dir.chdir "../.." do
+      sh("fvm","flutter", "clean")
+      sh("fvm","flutter", "pub", "get")
+      sh("fvm","flutter", "build", "apk")
+      
+    end 
+      firebase_app_distribution(
+            groups: "alpha",
+            release_notes: "INSERT RELEASE NOTE HERE",
+            app: "1:293056108039:android:96f895d7efb28aa369fca2",
+            firebase_cli_path: "/usr/local/bin/firebase",
+            firebase_cli_token: "INSERT TOKEN HERE",
+            apk_path: "../build/app/outputs/flutter-apk/app-release.apk",
+            
+        )
+    end
+end
