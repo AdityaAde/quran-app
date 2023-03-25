@@ -39,7 +39,7 @@ download this Requirements and make sure you have experience to set global varia
     
 ## Configuration & Deployment
 
-Install and setup CUIT project
+Install and setup Quran App Project
 
 ```bash
   git clone https://github.com/AdityaAde/quran-app.git
